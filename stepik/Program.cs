@@ -4,7 +4,7 @@ public class Program
 {
     public static void Main()
     {
-        string connectionString = "Server=localhost;Database=test;Uid=root;Pwd=m48kHz16bit%;";
+        string connectionString = "Server=localhost;Database=test;Uid=root;Pwd=;";
 
         using (var connection = new MySqlConnection(connectionString))
         {
