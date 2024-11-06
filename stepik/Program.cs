@@ -13,8 +13,9 @@
 
 Выберите действие (введите число и нажмите Enter):
 
-1. Зарегистрироваться
-2. Закрыть приложение
+1. Войти
+2. Зарегистрироваться
+3. Закрыть приложение
 
 ************************************************
 ");
@@ -24,9 +25,12 @@
             switch (choice)
             {
                 case "1":
-                    RegisterUser();
+                    LoginUser();
                     break;
                 case "2":
+                    RegisterUser();
+                    break;
+                case "3":
                     Console.WriteLine("До свидания!");
                     continueProgram = false;
                     break;
@@ -55,6 +59,22 @@
         else
         {
             Console.WriteLine($"Произошла ошибка, произведен выход на главную страницу\n");
+        }
+    }
+
+    public static void LoginUser()
+    {
+        Console.WriteLine("Введите имя и фамилию через пробел и нажмите Enter:");
+        var userName = Console.ReadLine();
+        var user = UsersService.Get(userName);
+
+        if (user.FullName != null)
+        {
+            Console.WriteLine($"Пользователь '{user.FullName}' успешно вошел {DateTime.Now}\n");
+        }
+        else
+        {
+            Console.WriteLine($"Пользователь не найден, произведен выход на главную страницу\n");
         }
     }
 }
