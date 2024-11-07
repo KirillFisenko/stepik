@@ -1,7 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 
 public class UsersService
-{
+{  
     /// <summary>
     /// Добавление нового пользователя в таблицу users
     /// </summary>
@@ -9,7 +9,7 @@ public class UsersService
     /// <returns>Количество вставленных записей</returns>
     public static int Add(User user)
     {
-        using var connection = new MySqlConnection(Constant.connectionString);
+        using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
         var query = @"
                 INSERT INTO users (full_name, details, join_date, avatar, is_active)
@@ -32,7 +32,7 @@ public class UsersService
     public static User Get(string fullName)
     {
         var user = new User();
-        using var connection = new MySqlConnection(Constant.connectionString);
+        using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
         var query = @"SELECT * FROM users
                       WHERE full_name = @FullName AND is_active = 1;";
