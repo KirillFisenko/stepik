@@ -1,13 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
 
 public class UsersService
-{  
+{
     /// <summary>
     /// Добавление нового пользователя в таблицу users
     /// </summary>
     /// <param name="user">Новый пользователь</param>
-    /// <returns>Количество вставленных записей</returns>
-    public static int Add(User user)
+    /// <returns>Удалось ли добавить пользователя</returns>
+    public static bool Add(User user)
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
@@ -21,7 +21,7 @@ public class UsersService
         command.Parameters.AddWithValue("@Avatar", user.Avatar);
         command.Parameters.AddWithValue("@IsActive", user.IsActive);
         var rowsAffected = command.ExecuteNonQuery();
-        return rowsAffected;
+        return rowsAffected == 1;
     }
 
     /// <summary>

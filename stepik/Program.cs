@@ -50,9 +50,9 @@
             FullName = userName
         };
 
-        var result = UsersService.Add(newUser);
+        var isAdditionSuccessful = UsersService.Add(newUser);
 
-        if (result == 1)
+        if (isAdditionSuccessful)
         {
             Console.WriteLine($"Пользователь '{newUser.FullName}' успешно добавлен {newUser.JoinDate}\n");
         }
