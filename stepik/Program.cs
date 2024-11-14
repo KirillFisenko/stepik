@@ -2,9 +2,7 @@
 {
     public static void Main()
     {
-        bool continueProgram = true;
-
-        while (continueProgram)
+        while (true)
         {
             Console.WriteLine(@"
 ************************************************
@@ -19,7 +17,6 @@
 
 ************************************************
 ");
-
             string choice = Console.ReadLine();
 
             switch (choice)
@@ -32,8 +29,7 @@
                     break;
                 case "3":
                     Console.WriteLine("До свидания!");
-                    continueProgram = false;
-                    break;
+                    return;
                 default:
                     Console.WriteLine("Неверный выбор. Попробуйте снова.");
                     break;

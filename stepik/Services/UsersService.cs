@@ -9,19 +9,26 @@ public class UsersService
     /// <returns>Удалось ли добавить пользователя</returns>
     public static bool Add(User user)
     {
-        using var connection = new MySqlConnection(Constant.ConnectionString);
-        connection.Open();
-        var query = @"
+        try
+        {
+            using var connection = new MySqlConnection(Constant.ConnectionString);
+            connection.Open();
+            var query = @"
                 INSERT INTO users (full_name, details, join_date, avatar, is_active)
                 VALUES (@FullName, @Details, @JoinDate, @Avatar, @IsActive)";
-        using var command = new MySqlCommand(query, connection);
-        command.Parameters.AddWithValue("@FullName", user.FullName);
-        command.Parameters.AddWithValue("@Details", user.Details);
-        command.Parameters.AddWithValue("@JoinDate", user.JoinDate);
-        command.Parameters.AddWithValue("@Avatar", user.Avatar);
-        command.Parameters.AddWithValue("@IsActive", user.IsActive);
-        var rowsAffected = command.ExecuteNonQuery();
-        return rowsAffected == 1;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@FullName", user.FullName);
+            command.Parameters.AddWithValue("@Details", user.Details);
+            command.Parameters.AddWithValue("@JoinDate", user.JoinDate);
+            command.Parameters.AddWithValue("@Avatar", user.Avatar);
+            command.Parameters.AddWithValue("@IsActive", user.IsActive);
+            var rowsAffected = command.ExecuteNonQuery();
+            return rowsAffected == 1;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     /// <summary>
