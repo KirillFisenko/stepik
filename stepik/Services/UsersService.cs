@@ -34,7 +34,7 @@ public class UsersService
     /// <summary>
     /// Получение пользователя из таблицы users
     /// </summary>
-    /// <param name="fullName">Полное имя пользлователя</param>
+    /// <param name="fullName">Полное имя пользователя</param>
     /// <returns>User</returns>
     public static User Get(string fullName)
     {
