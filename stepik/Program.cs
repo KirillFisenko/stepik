@@ -28,7 +28,9 @@
                     }
                     break;
                 case "3":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("До свидания!\n");
+                    Console.ResetColor();
                     return;
                 default:
                     PrintWrongChoiceMessage();
@@ -42,11 +44,15 @@
     /// </summary>
     public static void DisplayMainMenu()
     {
+        var totalCoursesCount = CoursesService.GetTotalCount();
+        var totalUsersCount = CoursesService.GetTotalCount();
         Console.ForegroundColor = ConsoleColor.DarkBlue;
-        Console.WriteLine(@"
+        Console.WriteLine(@$"
 ************************************************
 * Добро пожаловать на онлайн платформу Stepik! *
 ************************************************
+Количество курсов на платформе: {totalCoursesCount}
+Количество пользователей на платформе: {totalUsersCount}
 
 Выберите действие (введите число и нажмите Enter):
 
@@ -57,7 +63,7 @@
 ************************************************
 
 ");
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.ResetColor();
     }
 
     /// <summary>
@@ -67,7 +73,7 @@
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Неверный выбор. Попробуйте снова.");
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.ResetColor();
     }
 
     /// <summary>
@@ -94,14 +100,14 @@
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Пользователь '{newUser.FullName}' успешно добавлен.\n");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
             return newUser;
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Произошла ошибка, произведен выход на главную страницу.\n");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
             DisplayMainMenu();
             return new User();
         }
@@ -126,14 +132,14 @@
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Пользователь '{user.FullName}' успешно вошел.\n");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
             return user;
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Пользователь не найден, произведен выход на главную страницу.\n");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
             DisplayMainMenu();
             return new User();
         }
@@ -172,6 +178,7 @@
     /// </summary>
     public static void DisplayUserMenu(User user)
     {
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine(@$"
 * {user.FullName} *
 
@@ -181,6 +188,7 @@
 2. Посмотреть курсы
 3. Выйти
 ");
+        Console.ResetColor();
     }
 
     /// <summary>
@@ -209,6 +217,7 @@
     /// </summary>
     public static void DisplayProfileDetails(User user)
     {
+        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(@$"
 * {user.FullName} *
 
@@ -221,6 +230,7 @@
 Описание профиля: {user.Details ?? "Не заполнено"}
 Фото профиля: {user.Avatar ?? "Не заполнено"}
 ");
+        Console.ResetColor();
     }
 
     /// <summary>
@@ -250,6 +260,7 @@
     private static void DisplayUserCourses(string fullName)
     {
         List<Course> courses = CoursesService.Get(fullName);
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(@$"* Список курсов {fullName} *
 
 Выберите действие (введите число и нажмите Enter):
@@ -276,5 +287,6 @@ ______________________________________________");
                 count++;
             }
         }
+        Console.ResetColor();
     }
 }

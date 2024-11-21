@@ -40,4 +40,20 @@ public class CoursesService
 
         return courses;
     }
+
+    /// <summary>
+    /// Получение общего количества курсов
+    /// </summary>
+    public static int GetTotalCount()
+    {
+        using var connection = new MySqlConnection(Constant.ConnectionString);
+        connection.Open();
+
+        var query = "SELECT COUNT(*) FROM courses;";
+
+        using var command = new MySqlCommand(query, connection);
+        var result = command.ExecuteScalar();
+
+        return result != null ? Convert.ToInt32(result) : 0;
+    }
 }
