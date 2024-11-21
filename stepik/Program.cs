@@ -42,6 +42,7 @@
     /// </summary>
     public static void DisplayMainMenu()
     {
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine(@"
 ************************************************
 * Добро пожаловать на онлайн платформу Stepik! *
@@ -56,6 +57,7 @@
 ************************************************
 
 ");
+        Console.ForegroundColor = ConsoleColor.White;
     }
 
     /// <summary>
@@ -63,7 +65,9 @@
     /// </summary>
     public static void PrintWrongChoiceMessage()
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Неверный выбор. Попробуйте снова.");
+        Console.ForegroundColor = ConsoleColor.White;
     }
 
     /// <summary>
@@ -88,12 +92,16 @@
 
         if (isAdditionSuccessful)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Пользователь '{newUser.FullName}' успешно добавлен.\n");
+            Console.ForegroundColor = ConsoleColor.White;
             return newUser;
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Произошла ошибка, произведен выход на главную страницу.\n");
+            Console.ForegroundColor = ConsoleColor.White;
             DisplayMainMenu();
             return new User();
         }
@@ -116,12 +124,16 @@
 
         if (!string.IsNullOrEmpty(user?.FullName))
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Пользователь '{user.FullName}' успешно вошел.\n");
+            Console.ForegroundColor = ConsoleColor.White;
             return user;
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Пользователь не найден, произведен выход на главную страницу.\n");
+            Console.ForegroundColor = ConsoleColor.White;
             DisplayMainMenu();
             return new User();
         }
