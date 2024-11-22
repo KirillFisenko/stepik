@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Data;
 
 public class UsersService
 {
@@ -41,18 +42,21 @@ public class UsersService
         var user = new User();
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
-        var query = @"SELECT * FROM users
+        var query = @"SELECT full_name, details, join_date, avatar, is_active, knowledge, reputation, followers_count FROM users
                       WHERE full_name = @FullName AND is_active = 1;";
         using var command = new MySqlCommand(query, connection);
         command.Parameters.AddWithValue("@FullName", fullName);
         using var reader = command.ExecuteReader();
         while (reader.Read())
         {
-            user.FullName = reader.IsDBNull(1) ? null : reader.GetString(1);
-            user.Details = reader.IsDBNull(2) ? null : reader.GetString(2);
-            user.JoinDate = reader.GetDateTime(3);
-            user.Avatar = reader.IsDBNull(4) ? null : reader.GetString(4);
-            user.IsActive = reader.GetBoolean(5);
+            user.FullName = reader.IsDBNull(0) ? null : reader.GetString(0);
+            user.Details = reader.IsDBNull(1) ? null : reader.GetString(1);
+            user.JoinDate = reader.GetDateTime(2);
+            user.Avatar = reader.IsDBNull(3) ? null : reader.GetString(3);
+            user.IsActive = reader.GetBoolean(4);
+            user.Knowledge = reader.GetInt32(5);
+            user.Reputation = reader.GetInt32(6);
+            user.FollowersCount = reader.GetInt32(7);
         }
 
         return user;
@@ -72,5 +76,36 @@ public class UsersService
         var result = command.ExecuteScalar();
 
         return result != null ? Convert.ToInt32(result) : 0;
+    }
+
+    /// <summary>
+    /// Форматирование показателей пользователя
+    /// </summary>
+    /// <param name="number">Число для форматирования</param>
+    /// <returns>Отформатированное число</returns>
+    public static string FormatUserMetrics(int number)
+    {
+        using var connection = new MySqlConnection(Constant.ConnectionString);
+        connection.Open();
+
+        using var command = new MySqlCommand("format_number", connection);
+        command.CommandType = CommandType.StoredProcedure;
+
+        var numberParam = new MySqlParameter("number", number)
+        {
+            Direction = ParameterDirection.Input
+        };
+        command.Parameters.Add(numberParam);
+
+        var returnValueParam = new MySqlParameter()
+        {
+            Direction = ParameterDirection.ReturnValue
+        };
+        command.Parameters.Add(returnValueParam);
+
+        command.ExecuteNonQuery();
+
+        var returnValue = returnValueParam.Value;
+        return returnValue != null ? returnValue.ToString() : string.Empty;
     }
 }

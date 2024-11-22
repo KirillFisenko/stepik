@@ -229,6 +229,9 @@
 Дата регистрации: {user.JoinDate}
 Описание профиля: {user.Details ?? "Не заполнено"}
 Фото профиля: {user.Avatar ?? "Не заполнено"}
+{UsersService.FormatUserMetrics(user.FollowersCount)} подписчиков
+{UsersService.FormatUserMetrics(user.Reputation)} репутация
+{UsersService.FormatUserMetrics(user.Knowledge)} знания
 ");
         Console.ResetColor();
     }
