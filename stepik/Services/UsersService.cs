@@ -38,21 +38,24 @@ public class UsersService
     /// <returns>User</returns>
     public static User Get(string fullName)
     {
-        var user = new User();
+        User user = null;
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
         var query = @"SELECT * FROM users
-                      WHERE full_name = @FullName AND is_active = 1;";
+                  WHERE full_name = @FullName AND is_active = 1;";
         using var command = new MySqlCommand(query, connection);
         command.Parameters.AddWithValue("@FullName", fullName);
         using var reader = command.ExecuteReader();
-        while (reader.Read())
+        if (reader.Read())
         {
-            user.FullName = reader.IsDBNull(1) ? null : reader.GetString(1);
-            user.Details = reader.IsDBNull(2) ? null : reader.GetString(2);
-            user.JoinDate = reader.GetDateTime(3);
-            user.Avatar = reader.IsDBNull(4) ? null : reader.GetString(4);
-            user.IsActive = reader.GetBoolean(5);
+            user = new User
+            {
+                FullName = reader.IsDBNull(1) ? null : reader.GetString(1),
+                Details = reader.IsDBNull(2) ? null : reader.GetString(2),
+                JoinDate = reader.GetDateTime(3),
+                Avatar = reader.IsDBNull(4) ? null : reader.GetString(4),
+                IsActive = reader.GetBoolean(5)
+            };
         }
 
         return user;

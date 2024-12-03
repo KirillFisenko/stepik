@@ -64,7 +64,7 @@
         var userName = Console.ReadLine();
         var user = UsersService.Get(userName);
 
-        if (user.FullName != null)
+        if (user != null)
         {
             Console.WriteLine($"Пользователь '{user.FullName}' успешно вошел {DateTime.Now}\n");
         }
