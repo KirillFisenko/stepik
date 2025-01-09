@@ -14,9 +14,8 @@ public class UsersService
         {
             using var connection = new MySqlConnection(Constant.ConnectionString);
             connection.Open();
-            var query = @"
-                INSERT INTO users (full_name, details, join_date, avatar, is_active)
-                VALUES (@FullName, @Details, @JoinDate, @Avatar, @IsActive)";
+            var query = @"INSERT INTO users (full_name, details, join_date, avatar, is_active)
+                          VALUES (@FullName, @Details, @JoinDate, @Avatar, @IsActive)";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@FullName", user.FullName);
             command.Parameters.AddWithValue("@Details", user.Details);
@@ -43,7 +42,7 @@ public class UsersService
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
         var query = @"SELECT * FROM users
-                  WHERE full_name = @FullName AND is_active = 1;";
+                      WHERE full_name = @FullName AND is_active = 1;";
         using var command = new MySqlCommand(query, connection);
         command.Parameters.AddWithValue("@FullName", fullName);
         using var reader = command.ExecuteReader();

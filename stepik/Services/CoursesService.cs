@@ -6,7 +6,7 @@ public class CoursesService
     /// Получение списка курсов пользователя
     /// </summary>
     /// <param name="fullName">Полное имя пользователя</param>
-    /// <returns>List<Course></returns>
+    /// <returns>Список курсов</returns>
     public static List<Course> Get(string fullName)
     {
         var courses = new List<Course>();
@@ -14,13 +14,12 @@ public class CoursesService
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
 
-        var query = @"
-            SELECT title, summary, photo
-            FROM user_courses
-            JOIN courses ON user_courses.course_id = courses.id
-            JOIN users ON users.id = user_courses.user_id
-            WHERE users.full_name = @fullName AND users.is_active = 1
-            ORDER BY user_courses.last_viewed DESC;";
+        var query = @"SELECT title, summary, photo, courses.id
+                      FROM user_courses
+                      JOIN courses ON user_courses.course_id = courses.id
+                      JOIN users ON users.id = user_courses.user_id
+                      WHERE users.full_name = @fullName AND users.is_active = 1
+                      ORDER BY user_courses.last_viewed DESC;";
 
         using var command = new MySqlCommand(query, connection);
         var fullNameParam = new MySqlParameter("@fullName", fullName);
@@ -33,7 +32,8 @@ public class CoursesService
             {
                 Title = reader.GetString(0),
                 Summary = reader.IsDBNull(1) ? null : reader.GetString(1),
-                Photo = reader.IsDBNull(2) ? null : reader.GetString(2)
+                Photo = reader.IsDBNull(2) ? null : reader.GetString(2),
+                Id = reader.GetInt32(3)
             };
             courses.Add(course);
         }
