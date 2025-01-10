@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Data;
 
 public class CoursesService
 {
@@ -30,10 +31,10 @@ public class CoursesService
         {
             var course = new Course
             {
-                Title = reader.GetString(0),
-                Summary = reader.IsDBNull(1) ? null : reader.GetString(1),
-                Photo = reader.IsDBNull(2) ? null : reader.GetString(2),
-                Id = reader.GetInt32(3)
+                Id = reader.GetInt32("id"),
+                Title = reader.GetString("title"),
+                Summary = reader.IsDBNull("summary") ? null : reader.GetString("summary"),
+                Photo = reader.IsDBNull("photo") ? null : reader.GetString("photo")
             };
             courses.Add(course);
         }

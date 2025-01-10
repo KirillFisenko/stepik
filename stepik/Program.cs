@@ -1,7 +1,4 @@
-﻿using stepik.Models;
-using stepik.Services;
-
-public class Program
+﻿public class Program
 {
     /// <summary>
     /// Обработка начального меню
@@ -50,22 +47,16 @@ public class Program
         var totalCoursesCount = CoursesService.GetTotalCount();
         var totalUsersCount = CoursesService.GetTotalCount();
         Console.ForegroundColor = ConsoleColor.DarkBlue;
-        Console.WriteLine(@$"
-        ************************************************
-        * Добро пожаловать на онлайн платформу Stepik! *
-        ************************************************
-        Количество курсов на платформе: {totalCoursesCount}
-        Количество пользователей на платформе: {totalUsersCount}
-
-        Выберите действие (введите число и нажмите Enter):
-
-        1. Войти
-        2. Зарегистрироваться
-        3. Закрыть приложение
-
-        ************************************************
-
-        ");
+        Console.WriteLine("************************************************\n" +
+                          "* Добро пожаловать на онлайн платформу Stepik! *\n" +
+                          "************************************************\n" +
+                          "Количество курсов на платформе: " + totalCoursesCount + "\n" +
+                          "Количество пользователей на платформе: " + totalUsersCount + "\n\n" +
+                          "Выберите действие (введите число и нажмите Enter):\n\n" +
+                          "1. Войти\n" +
+                          "2. Зарегистрироваться\n" +
+                          "3. Закрыть приложение\n" +
+                          "************************************************");
         Console.ResetColor();
     }
 
@@ -182,15 +173,11 @@ public class Program
     public static void DisplayUserMenu(User user)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine(@$"
-        * {user.FullName} *
-
-        Выберите действие (введите число и нажмите Enter):
-
-        1. Посмотреть профиль
-        2. Посмотреть курсы
-        3. Выйти
-        ");
+        Console.WriteLine("\n* " + user.FullName + " *\n\n" +
+                          "Выберите действие (введите число и нажмите Enter):\n" +
+                          "1. Посмотреть профиль\n" +
+                          "2. Посмотреть курсы\n" +
+                          "3. Выйти");
         Console.ResetColor();
     }
 
@@ -221,21 +208,16 @@ public class Program
     public static void DisplayProfileDetails(User user)
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine(@$"
-        * {user.FullName} *
-
-        Выберите действие (введите число и нажмите Enter):
-
-        1. Назад
-
-        Профиль пользователя: {user.FullName}
-        Дата регистрации: {user.JoinDate}
-        Описание профиля: {user.Details ?? "Не заполнено"}
-        Фото профиля: {user.Avatar ?? "Не заполнено"}
-        {UsersService.FormatUserMetrics(user.FollowersCount)} подписчиков
-        {UsersService.FormatUserMetrics(user.Reputation)} репутация
-        {UsersService.FormatUserMetrics(user.Knowledge)} знания
-        ");
+        Console.WriteLine("\n* " + user.FullName + " *\n\n" +
+                          "Выберите действие (введите число и нажмите Enter):\n" +
+                          "1. Назад\n\n" +
+                          "Профиль пользователя: " + user.FullName + "\n" +
+                          "Дата регистрации: " + user.JoinDate + "\n" +
+                          "Описание профиля: " + (user.Details ?? "Не заполнено") + "\n" +
+                          "Фото профиля: " + (user.Avatar ?? "Не заполнено") + "\n" +
+                          UsersService.FormatUserMetrics(user.FollowersCount) + " подписчиков\n" +
+                          UsersService.FormatUserMetrics(user.Reputation) + " репутация\n" +
+                          UsersService.FormatUserMetrics(user.Knowledge) + " знания");
         Console.ResetColor();
     }
 
@@ -274,12 +256,9 @@ public class Program
     {
         List<Course> courses = CoursesService.Get(fullName);
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(@$"* Список курсов {fullName} *
-
-        Выберите действие (введите число и нажмите Enter):
-
-        0. Назад        
-        ");
+        Console.WriteLine("\n* Список курсов " + fullName + " *\n\n" +
+                          "Выберите действие (введите число и нажмите Enter):\n" +
+                          "0. Назад");
 
         if (courses.Count == 0)
         {
@@ -287,16 +266,15 @@ public class Program
         }
         else
         {
-            Console.WriteLine("Для просмотра подробностей курса, введите его id.");
+            Console.WriteLine("Для просмотра подробностей курса, введите его id.\n");
             foreach (var course in courses)
             {
-                Console.WriteLine(@$"
-                ______________________________________________
-                id: {course.Id}
-                Название: {course.Title}
-                Описание: {course.Summary ?? "Отсутствует"}
-                Фото: {course.Photo ?? "Отсутствует"}
-                ______________________________________________");
+                Console.WriteLine("______________________________________________\n" +
+                                  "id: " + course.Id + "\n" +
+                                  "Название: " + course.Title + "\n" +
+                                  "Описание: " + (course.Summary ?? "Отсутствует") + "\n" +
+                                  "Фото: " + (course.Photo ?? "Отсутствует") + "\n" +
+                                  "______________________________________________");
             }
         }
         Console.ResetColor();
@@ -320,14 +298,18 @@ public class Program
                 default:
                     if (commentsIds.Contains(choice))
                     {
-                        var isCommentDeleted = CommentsService.Delete(id);
+                        var isCommentDeleted = CommentsService.Delete(Convert.ToInt32(choice));
                         if (isCommentDeleted)
                         {
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Комментарий успешно удален");
+                            Console.ResetColor();
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Ошибка удаления комментария");
+                            Console.ResetColor();
                         }
                     }
                     else
@@ -347,13 +329,10 @@ public class Program
         List<Course> courses = CoursesService.Get(user.FullName);
         var currentCourse = courses.FirstOrDefault(x => x.Id == id);
         List<Comment> comments = CommentsService.Get(id);
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(@$"* Комментарии к курсу {currentCourse.Title} *
-
-        Выберите действие (введите число и нажмите Enter):
-
-        0. Назад
-        ");
+        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.WriteLine("\n* Комментарии к курсу " + currentCourse.Title + " *\n\n" +
+                          "Выберите действие (введите число и нажмите Enter):\n" +
+                          "0. Назад");
 
         if (comments.Count == 0)
         {
@@ -364,12 +343,11 @@ public class Program
             Console.WriteLine("Чтобы удалить комментарий, введите его id.");
             foreach (var comment in comments)
             {
-                Console.WriteLine(@$"
-                ______________________________________________                
-                {comment.Id}
-                {comment.Time}
-                {comment.Text}
-                ______________________________________________");
+                Console.WriteLine("______________________________________________\n" +
+                                  comment.Id + "\n" +
+                                  comment.Time + "\n" +
+                                  comment.Text + "\n" +
+                                  "______________________________________________");
             }
         }
         Console.ResetColor();
