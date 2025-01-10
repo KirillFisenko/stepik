@@ -45,7 +45,7 @@
     public static void DisplayMainMenu()
     {
         var totalCoursesCount = CoursesService.GetTotalCount();
-        var totalUsersCount = CoursesService.GetTotalCount();
+        var totalUsersCount = UsersService.GetTotalCount();
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine("************************************************\n" +
                           "* Добро пожаловать на онлайн платформу Stepik! *\n" +
