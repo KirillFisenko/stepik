@@ -45,7 +45,7 @@
     public static void DisplayMainMenu()
     {
         var totalCoursesCount = CoursesService.GetTotalCount();
-        var totalUsersCount = CoursesService.GetTotalCount();
+        var totalUsersCount = UsersService.GetTotalCount();
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine(@$"
 ************************************************
@@ -146,7 +146,7 @@
     }
 
     /// <summary>
-    /// Обрабатка меню пользователя после успешного входа.
+    /// Обработка меню пользователя после успешного входа.
     /// </summary>
     public static void HandleUserMenu(User user)
     {
