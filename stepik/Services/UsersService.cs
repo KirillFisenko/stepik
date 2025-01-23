@@ -106,4 +106,24 @@ public class UsersService
         var returnValue = returnValueParam.Value;
         return returnValue != null ? returnValue.ToString() : string.Empty;
     }
+
+    /// <summary>
+    /// Рейтинг пользователей
+    /// </summary>
+    /// <returns>DataSet</returns>
+    public static DataSet GetUserRating()
+    {
+        using var connection = new MySqlConnection(Constant.ConnectionString);
+        connection.Open();
+        var query = @"SELECT full_name, knowledge, reputation
+                      FROM users
+                      WHERE is_active = 1
+                      ORDER BY knowledge DESC
+                      LIMIT 10;";
+        using var command = new MySqlCommand(query, connection);
+        using var dataAdapter = new MySqlDataAdapter(command);
+        var dataSet = new DataSet();
+        dataAdapter.Fill(dataSet, "userRating");
+        return dataSet;
+    }
 }

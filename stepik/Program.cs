@@ -1,4 +1,6 @@
-﻿public class Program
+﻿using System.Data;
+
+public class Program
 {
     /// <summary>
     /// Обработка начального меню
@@ -9,7 +11,7 @@
 
         while (true)
         {
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             switch (choice)
             {
@@ -28,6 +30,9 @@
                     }
                     break;
                 case "3":
+                    HandleUserRatingMenu();
+                    break;
+                case "4":
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("До свидания!\n");
                     Console.ResetColor();
@@ -55,7 +60,8 @@
                           "Выберите действие (введите число и нажмите Enter):\n\n" +
                           "1. Войти\n" +
                           "2. Зарегистрироваться\n" +
-                          "3. Закрыть приложение\n" +
+                          "3. Рейтинг пользователей\n" +
+                          "4. Закрыть приложение\n" +
                           "************************************************");
         Console.ResetColor();
     }
@@ -120,7 +126,7 @@
             userName = Console.ReadLine();
         }
 
-        User user = UsersService.Get(userName);
+        User? user = UsersService.Get(userName);
 
         if (user != null)
         {
@@ -147,7 +153,7 @@
         while (true)
         {
             DisplayUserMenu(user);
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             switch (choice)
             {
@@ -165,6 +171,62 @@
                     break;
             }
         }
+    }
+
+    /// <summary>
+    /// Обработка меню рейтинга пользователей.
+    /// </summary>
+    public static void HandleUserRatingMenu()
+    {
+        while (true)
+        {
+            DisplayUserRating();
+            string? choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    DisplayMainMenu();
+                    return;
+                default:
+                    PrintWrongChoiceMessage();
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Отображение рейтинга пользователей.
+    /// </summary>
+    public static void DisplayUserRating()
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\n* Рейтинг пользователей *\n\n" +
+                          "Выберите действие (введите число и нажмите Enter):\n" +
+                          "1. Назад\n");
+
+        var dataSet = UsersService.GetUserRating();
+
+        if (dataSet.Tables.Count == 0 || dataSet.Tables["userRating"]!.Rows.Count == 0)
+        {
+            Console.WriteLine("На платформе еще нет пользователей");
+            return;
+        }
+
+        var indent = 22;
+        var separatorCount = 56;
+
+        Console.WriteLine(new string('-', separatorCount));
+        Console.WriteLine($"{"Пользователь".PadRight(indent)} {"Знания".PadRight(indent)} {"Репутация".PadRight(indent)}");
+        Console.WriteLine(new string('-', separatorCount));
+
+        foreach (DataRow row in dataSet.Tables["userRating"]!.Rows)
+        {
+            Console.WriteLine($"{row["full_name"]?.ToString()?.PadRight(indent)} {row["knowledge"]?.ToString()?.PadRight(indent)} {row["reputation"]?.ToString()?.PadRight(indent)}");
+        }
+
+        Console.WriteLine(new string('-', separatorCount));
+        Console.ResetColor();
     }
 
     /// <summary>
@@ -189,7 +251,7 @@
         while (true)
         {
             DisplayProfileDetails(user);
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             switch (choice)
             {
@@ -229,7 +291,7 @@
         while (true)
         {
             var coursesIds = DisplayUserCourses(user.FullName);
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             switch (choice)
             {
@@ -289,7 +351,7 @@
         while (true)
         {
             var commentsIds = DisplayUserComments(id, user);
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             switch (choice)
             {
@@ -330,7 +392,7 @@
         var currentCourse = courses.FirstOrDefault(x => x.Id == id);
         List<Comment> comments = CommentsService.Get(id);
         Console.ForegroundColor = ConsoleColor.Gray;
-        Console.WriteLine("\n* Комментарии к курсу " + currentCourse.Title + " *\n\n" +
+        Console.WriteLine("\n* Комментарии к курсу " + currentCourse?.Title + " *\n\n" +
                           "Выберите действие (введите число и нажмите Enter):\n" +
                           "0. Назад");
 
