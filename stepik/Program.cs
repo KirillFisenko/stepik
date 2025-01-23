@@ -217,7 +217,9 @@ public class Program
         var separatorCount = 56;
 
         Console.WriteLine(new string('-', separatorCount));
-        Console.WriteLine($"{"Пользователь".PadRight(indent)} {"Знания".PadRight(indent)} {"Репутация".PadRight(indent)}");
+        Console.WriteLine($"{"Пользователь".PadRight(indent)} " +
+                          $"{"Знания".PadRight(indent)} " +
+                          $"{"Репутация".PadRight(indent)}");
         Console.WriteLine(new string('-', separatorCount));
 
         foreach (DataRow row in dataSet.Tables[0].Rows)
