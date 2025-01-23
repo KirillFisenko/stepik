@@ -222,7 +222,9 @@ public class Program
 
         foreach (DataRow row in dataSet.Tables[0].Rows)
         {
-            Console.WriteLine($"{row["full_name"]?.ToString()?.PadRight(indent)} {row["knowledge"]?.ToString()?.PadRight(indent)} {row["reputation"]?.ToString()?.PadRight(indent)}");
+            Console.WriteLine($"{row["full_name"]?.ToString()?.PadRight(indent)} " +
+                              $"{row["knowledge"]?.ToString()?.PadRight(indent)} " +
+                              $"{row["reputation"]?.ToString()?.PadRight(indent)}");
         }
 
         Console.WriteLine(new string('-', separatorCount));
