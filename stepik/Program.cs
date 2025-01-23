@@ -207,7 +207,7 @@ public class Program
 
         var dataSet = UsersService.GetUserRating();
 
-        if (dataSet.Tables.Count == 0 || dataSet.Tables["userRating"]!.Rows.Count == 0)
+        if (dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0)
         {
             Console.WriteLine("На платформе еще нет пользователей");
             return;
@@ -220,7 +220,7 @@ public class Program
         Console.WriteLine($"{"Пользователь".PadRight(indent)} {"Знания".PadRight(indent)} {"Репутация".PadRight(indent)}");
         Console.WriteLine(new string('-', separatorCount));
 
-        foreach (DataRow row in dataSet.Tables["userRating"]!.Rows)
+        foreach (DataRow row in dataSet.Tables[0].Rows)
         {
             Console.WriteLine($"{row["full_name"]?.ToString()?.PadRight(indent)} {row["knowledge"]?.ToString()?.PadRight(indent)} {row["reputation"]?.ToString()?.PadRight(indent)}");
         }

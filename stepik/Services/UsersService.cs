@@ -123,7 +123,7 @@ public class UsersService
         using var command = new MySqlCommand(query, connection);
         using var dataAdapter = new MySqlDataAdapter(command);
         var dataSet = new DataSet();
-        dataAdapter.Fill(dataSet, "userRating");
+        dataAdapter.Fill(dataSet);
         return dataSet;
     }
 }
