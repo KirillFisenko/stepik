@@ -164,6 +164,9 @@ public class Program
                     HandleUserCoursesMenu(user);
                     break;
                 case "3":
+                    HandleUserCertificateMenu(user);
+                    break;
+                case "4":
                     DisplayMainMenu();
                     return;
                 default:
@@ -243,7 +246,8 @@ public class Program
                           "Выберите действие (введите число и нажмите Enter):\n" +
                           "1. Посмотреть профиль\n" +
                           "2. Посмотреть курсы\n" +
-                          "3. Выйти");
+                          "3. Посмотреть сертификаты\n" +
+                          "4. Выйти");
         Console.ResetColor();
     }
 
@@ -348,6 +352,65 @@ public class Program
     }
 
     /// <summary>
+    /// Обработка меню сертификатов.
+    /// </summary>
+    public static void HandleUserCertificateMenu(User user)
+    {
+        while (true)
+        {
+            DisplayCertificateDetails(user);
+            string? choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    return;
+                default:
+                    PrintWrongChoiceMessage();
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Отображение сертификатов пользователя.
+    /// </summary>
+    private static void DisplayCertificateDetails(User user)
+    {
+        var certificates = CertificatesService.Get(user.FullName);
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("\n* Сертификаты пользователя " + user.FullName + " *\n\n" +
+                          "Выберите действие (введите число и нажмите Enter):\n" +
+                          "1. Назад\n");
+
+        if (certificates.Tables.Count == 0 || certificates.Tables[0].Rows.Count == 0)
+        {
+            Console.WriteLine("У пользователя еще нет сертификатов");
+            return;
+        }
+
+        var indent = 25;
+        var separatorCount = 60;
+
+        Console.WriteLine(new string('-', separatorCount));
+        Console.WriteLine($"{"Курс".PadRight(indent)} " +
+                          $"{"Дата выдачи".PadRight(indent)} " +
+                          $"{"Оценка".PadRight(indent)}");
+        Console.WriteLine(new string('-', separatorCount));
+
+        foreach (DataRow row in certificates.Tables[0].Rows)
+        {
+            Console.WriteLine($"{row["title"]?.ToString()?.PadRight(indent)} " +
+                              $"{row["issue_date"]?.ToString()?.PadRight(indent)} " +
+                              $"{row["grade"]?.ToString()?.PadRight(indent)}");
+        }
+
+        Console.WriteLine(new string('-', separatorCount));
+        Console.ResetColor();
+    }
+
+
+    /// <summary>
     /// Обработка меню комментариев пользователя.
     /// </summary>
     public static void HandleUserCommentsMenu(int id, User user)
@@ -390,7 +453,7 @@ public class Program
     /// <summary>
     /// Отображение комментариев к курсам пользователя.
     /// </summary>
-    private static IEnumerable<string> DisplayUserComments(int id, User user)
+    public static IEnumerable<string> DisplayUserComments(int id, User user)
     {
         List<Course> courses = CoursesService.Get(user.FullName);
         var currentCourse = courses.FirstOrDefault(x => x.Id == id);
