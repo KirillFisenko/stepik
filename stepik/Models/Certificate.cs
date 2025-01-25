@@ -4,4 +4,3 @@
     public DateTime IssueDate { get; set; }
     public int Grade { get; set; }
 }
-
