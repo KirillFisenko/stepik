@@ -1,11 +1,14 @@
 ﻿public class MainMenu
 {
-    private readonly WrongChoice _wrongChoice = new WrongChoice();
+    private readonly WrongChoice _wrongChoice = new();
+    private readonly UsersService _usersService = new();
+    private readonly CoursesService _coursesService = new();
+    private readonly UsersProcessing _usersProcessing = new();
 
     public void Display()
     {
-        var totalCoursesCount = CoursesService.GetTotalCount();
-        var totalUsersCount = UsersService.GetTotalCount();
+        var totalCoursesCount = _coursesService.GetTotalCount();
+        var totalUsersCount = _usersService.GetTotalCount();
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine("************************************************\n" +
                           "* Добро пожаловать на онлайн платформу Stepik! *\n" +
@@ -30,7 +33,7 @@
             switch (choice)
             {
                 case "1":
-                    User user = UsersProcessing.PerformLogin();
+                    User user = _usersProcessing.PerformLogin();
                     if (!string.IsNullOrEmpty(user?.FullName))
                     {
                         HandleUserMenu(user);
@@ -38,7 +41,7 @@
                     Display();
                     break;
                 case "2":
-                    User newUser = UsersProcessing.PerformRegistration();
+                    User newUser = _usersProcessing.PerformRegistration();
                     if (!string.IsNullOrEmpty(newUser?.FullName))
                     {
                         HandleUserMenu(newUser);

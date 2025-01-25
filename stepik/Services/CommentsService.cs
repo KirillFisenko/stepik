@@ -7,7 +7,7 @@ public class CommentsService
     /// </summary>
     /// <param name="id">id курса</param>
     /// <returns>Список комментариев</returns>
-    public static List<Comment> Get(int id)
+    public List<Comment> Get(int id)
     {
         var comments = new List<Comment>();
 
@@ -48,7 +48,7 @@ public class CommentsService
     /// </summary>
     /// <param name="id">id комментария</param>
     /// <returns>Удалось ли удалить комментарий</returns>
-    public static bool Delete(int id)
+    public bool Delete(int id)
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();

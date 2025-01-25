@@ -1,6 +1,8 @@
-﻿public static class UsersProcessing
+﻿public class UsersProcessing
 {
-    public static User PerformRegistration()
+    private readonly UsersService _usersService = new();
+
+    public User PerformRegistration()
     {
         var userName = "";
         while (string.IsNullOrEmpty(userName))
@@ -14,7 +16,7 @@
             FullName = userName
         };
 
-        bool isAdditionSuccessful = UsersService.Add(newUser);
+        bool isAdditionSuccessful = _usersService.Add(newUser);
 
         if (isAdditionSuccessful)
         {
@@ -32,7 +34,7 @@
         }
     }
 
-    public static User PerformLogin()
+    public User PerformLogin()
     {
         var userName = "";
         while (string.IsNullOrEmpty(userName))
@@ -41,7 +43,7 @@
             userName = Console.ReadLine();
         }
 
-        User? user = UsersService.Get(userName);
+        User? user = _usersService.Get(userName);
 
         if (user != null)
         {
