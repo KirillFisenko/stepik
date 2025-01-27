@@ -8,9 +8,10 @@ public class UsersServiceTests
     public void Add_ShouldReturnTrue_WhenUserIsAdded()
     {
         // Arrange
+        var randomName = Guid.NewGuid().ToString();
         var newUser = new User
         {
-            FullName = "Add_ShouldReturnTrue_WhenUserIsAdded",
+            FullName = randomName,
             Details = "Описание нового пользователя",
             JoinDate = DateTime.Now,
             Avatar = "https://example.com/new_avatar.jpg",
@@ -25,7 +26,7 @@ public class UsersServiceTests
 
         // Assert
         Assert.True(result);
-        var addedUser = _usersService.Get("Add_ShouldReturnTrue_WhenUserIsAdded");
+        var addedUser = _usersService.Get(randomName);
         Assert.NotNull(addedUser);
         Assert.Equal(newUser.FullName, addedUser.FullName);
         Assert.Equal(newUser.Details, addedUser.Details);
