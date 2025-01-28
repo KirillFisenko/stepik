@@ -95,4 +95,37 @@ public class UsersServiceTests
             Assert.Equal(expectedRow["reputation"], resultRow["reputation"]);
         }
     }
+
+    [Fact]
+    public void GetUserSocialInfo_ShouldReturnDataSet()
+    {
+        // Arrange
+        var userName = "Петр Васильев";
+        var expectedDataSet = new DataSet();
+        var expectedTable = new DataTable();
+        expectedTable.Columns.Add("name", typeof(string));
+        expectedTable.Columns.Add("connect_url", typeof(string));
+
+        expectedTable.Rows.Add("Coursera", "https://www.coursera.org/user/user1");
+        expectedTable.Rows.Add("edX", "https://courses.edx.org/u/user1");
+        expectedTable.Rows.Add("Facebook", "https://www.facebook.com/user1");
+        expectedTable.Rows.Add("GitHub", "https://github.com/user1");
+        expectedTable.Rows.Add("Instagram", "https://www.instagram.com/user1");
+        expectedTable.Rows.Add("Twitter", "https://twitter.com/user1");
+        expectedTable.Rows.Add("VK", "https://vk.com/user1");
+
+        expectedDataSet.Tables.Add(expectedTable);
+
+        // Act
+        var resultDataSet = _usersService.GetUserSocialInfo(userName);
+
+        // Assert
+        for (int i = 0; i < expectedDataSet.Tables[0].Rows.Count; i++)
+        {
+            var expectedRow = expectedDataSet.Tables[0].Rows[i];
+            var resultRow = resultDataSet.Tables[0].Rows[i];
+            Assert.Equal(expectedRow["name"], resultRow["name"]);
+            Assert.Equal(expectedRow["connect_url"], resultRow["connect_url"]);
+        }
+    }
 }
