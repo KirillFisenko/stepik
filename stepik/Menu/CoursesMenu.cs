@@ -6,9 +6,9 @@ public record class CoursesMenu(User _user, WrongChoice _wrongChoice)
 
     public void Display()
     {
-        List<Course> courses = _coursesService.Get(_user.FullName);
+        List<Course> courses = _coursesService.Get(_user.full_name);
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\n* Список курсов " + _user.FullName + " *\n\n" +
+        Console.WriteLine("\n* Список курсов " + _user.full_name + " *\n\n" +
                           "Выберите действие (введите число и нажмите Enter):\n" +
                           "0. Назад");
 
@@ -36,7 +36,7 @@ public record class CoursesMenu(User _user, WrongChoice _wrongChoice)
     {
         while (true)
         {
-            List<Course> courses = _coursesService.Get(_user.FullName);
+            List<Course> courses = _coursesService.Get(_user.full_name);
             var coursesIds = courses.Select(x => x.Id.ToString()).ToList();
             string? choice = Console.ReadLine();
 

@@ -6,9 +6,9 @@ public record class CertificateMenu(User _user, WrongChoice _wrongChoice)
 
     public void Display()
     {
-        var certificates = _сertificatesService.Get(_user.FullName);
+        var certificates = _сertificatesService.Get(_user.full_name);
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\n* Сертификаты пользователя " + _user.FullName + " *\n\n" +
+        Console.WriteLine("\n* Сертификаты пользователя " + _user.full_name + " *\n\n" +
                           "Выберите действие (введите число и нажмите Enter):\n" +
                           "1. Назад\n");
 

@@ -34,7 +34,7 @@
             {
                 case "1":
                     User user = _usersProcessing.PerformLogin();
-                    if (!string.IsNullOrEmpty(user?.FullName))
+                    if (!string.IsNullOrEmpty(user?.full_name))
                     {
                         HandleUserMenu(user);
                     }
@@ -42,7 +42,7 @@
                     break;
                 case "2":
                     User newUser = _usersProcessing.PerformRegistration();
-                    if (!string.IsNullOrEmpty(newUser?.FullName))
+                    if (!string.IsNullOrEmpty(newUser?.full_name))
                     {
                         HandleUserMenu(newUser);
                     }

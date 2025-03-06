@@ -1,7 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
 
-public class CertificatesService
+public partial class CertificatesService
 {
     /// <summary>
     /// Получение сертификатов пользователя

@@ -13,7 +13,7 @@
 
         var newUser = new User
         {
-            FullName = userName
+            full_name = userName
         };
 
         bool isAdditionSuccessful = _usersService.Add(newUser);
@@ -21,7 +21,7 @@
         if (isAdditionSuccessful)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Пользователь '{newUser.FullName}' успешно добавлен.\n");
+            Console.WriteLine($"Пользователь '{newUser.full_name}' успешно добавлен.\n");
             Console.ResetColor();
             return newUser;
         }
@@ -48,7 +48,7 @@
         if (user != null)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Пользователь '{user.FullName}' успешно вошел.\n");
+            Console.WriteLine($"Пользователь '{user.full_name}' успешно вошел.\n");
             Console.ResetColor();
             return user;
         }

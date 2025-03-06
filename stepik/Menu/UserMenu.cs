@@ -3,7 +3,7 @@
     public void Display()
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("\n* " + _user.FullName + " *\n\n" +
+        Console.WriteLine("\n* " + _user.full_name + " *\n\n" +
                           "Выберите действие (введите число и нажмите Enter):\n" +
                           "1. Посмотреть профиль\n" +
                           "2. Посмотреть курсы\n" +

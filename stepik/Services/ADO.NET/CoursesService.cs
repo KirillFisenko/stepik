@@ -1,7 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
 
-public class CoursesService
+public partial class CoursesService
 {
     /// <summary>
     /// Получение списка курсов пользователя

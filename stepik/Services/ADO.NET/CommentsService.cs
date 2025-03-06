@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 
-public class CommentsService
+public partial class CommentsService
 {
     /// <summary>
     /// Получение всех комментариев к курсу

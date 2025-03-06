@@ -1,7 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
 
-public class UsersService
+public partial class UsersService
 {
     /// <summary>
     /// Добавление нового пользователя в таблицу users
@@ -17,11 +17,11 @@ public class UsersService
             var query = @"INSERT INTO users (full_name, details, join_date, avatar, is_active)
                           VALUES (@FullName, @Details, @JoinDate, @Avatar, @IsActive)";
             using var command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@FullName", user.FullName);
-            command.Parameters.AddWithValue("@Details", user.Details);
-            command.Parameters.AddWithValue("@JoinDate", user.JoinDate);
-            command.Parameters.AddWithValue("@Avatar", user.Avatar);
-            command.Parameters.AddWithValue("@IsActive", user.IsActive);
+            command.Parameters.AddWithValue("@FullName", user.full_name);
+            command.Parameters.AddWithValue("@Details", user.details);
+            command.Parameters.AddWithValue("@JoinDate", user.join_date);
+            command.Parameters.AddWithValue("@Avatar", user.avatar);
+            command.Parameters.AddWithValue("@IsActive", user.is_active);
             var rowsAffected = command.ExecuteNonQuery();
             return rowsAffected == 1;
         }
@@ -35,7 +35,7 @@ public class UsersService
     /// Получение пользователя из таблицы users
     /// </summary>
     /// <param name="fullName">Полное имя пользователя</param>
-    /// <returns>User</returns>
+    /// <returns>User</returns>    
     public User? Get(string fullName)
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
@@ -48,14 +48,14 @@ public class UsersService
         return reader.Read()
             ? new User
             {
-                FullName = reader.GetString("full_name"),
-                Details = reader.IsDBNull("details") ? null : reader.GetString("details"),
-                JoinDate = reader.GetDateTime("join_date"),
-                Avatar = reader.IsDBNull("avatar") ? null : reader.GetString("avatar"),
-                IsActive = reader.GetBoolean("is_active"),
-                Knowledge = reader.GetInt32("knowledge"),
-                Reputation = reader.GetInt32("reputation"),
-                FollowersCount = reader.GetInt32("followers_count")
+                full_name = reader.GetString("full_name"),
+                details = reader.IsDBNull("details") ? null : reader.GetString("details"),
+                join_date = reader.GetDateTime("join_date"),
+                avatar = reader.IsDBNull("avatar") ? null : reader.GetString("avatar"),
+                is_active = reader.GetBoolean("is_active"),
+                knowledge = reader.GetInt32("knowledge"),
+                reputation = reader.GetInt32("reputation"),
+                followers_count = reader.GetInt32("followers_count")
             }
             : null;
     }

@@ -8,7 +8,7 @@ public record class CommentsMenu(int _courseId, User _user, WrongChoice _wrongCh
     public void Display()
     {
         List<Comment> comments = _commentsService.Get(_courseId);
-        List<Course> courses = _coursesService.Get(_user.FullName);
+        List<Course> courses = _coursesService.Get(_user.full_name);
         var currentCourse = courses.FirstOrDefault(x => x.Id == _courseId);
         Console.ForegroundColor = ConsoleColor.Gray;
         Console.WriteLine("\n* Комментарии к курсу " + currentCourse?.Title + " *\n\n" +
