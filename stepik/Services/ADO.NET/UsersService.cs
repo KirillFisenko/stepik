@@ -35,8 +35,9 @@ public partial class UsersService
     /// Получение пользователя из таблицы users
     /// </summary>
     /// <param name="fullName">Полное имя пользователя</param>
-    /// <returns>User</returns>    
-    public User? Get(string fullName)
+    /// <returns>User</returns>   
+    [Obsolete("Метод ADO.NET устарел")]
+    public User? GetOld(string fullName)
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
