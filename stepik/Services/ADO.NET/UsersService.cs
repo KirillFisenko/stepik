@@ -8,7 +8,8 @@ public partial class UsersService
     /// </summary>
     /// <param name="user">Новый пользователь</param>
     /// <returns>Удалось ли добавить пользователя</returns>
-    public bool Add(User user)
+    [Obsolete("Метод ADO.NET устарел")]
+    public bool AddOld(User user)
     {
         try
         {
@@ -64,7 +65,8 @@ public partial class UsersService
     /// <summary>
     /// Получение общего количества пользователей
     /// </summary>
-    public int GetTotalCount()
+    [Obsolete("Метод ADO.NET устарел")]
+    public int GetTotalCountOld()
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
@@ -82,7 +84,8 @@ public partial class UsersService
     /// </summary>
     /// <param name="number">Число для форматирования</param>
     /// <returns>Отформатированное число</returns>
-    public string? FormatUserMetrics(int number)
+    [Obsolete("Метод ADO.NET устарел")]
+    public string? FormatUserMetricsOld(int number)
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
