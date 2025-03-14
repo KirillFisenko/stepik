@@ -1,14 +1,12 @@
-﻿using System.Data;
+﻿using stepik.Services;
+using System.Data;
 
-public record class CommentsMenu(int _courseId, User _user, WrongChoice _wrongChoice)
+public record class CommentsMenu(int _courseId, User _user, ServiceProvider _serviceProvider)
 {
-    private readonly CoursesService _coursesService = new();
-    private readonly CommentsService _commentsService = new();
-
     public void Display()
     {
-        List<Comment> comments = _commentsService.Get(_courseId);
-        List<Course> courses = _coursesService.Get(_user.full_name);
+        List<Comment> comments = _serviceProvider.commentsService.Get(_courseId);
+        List<Course> courses = _serviceProvider.coursesService.Get(_user.full_name);
         var currentCourse = courses.FirstOrDefault(x => x.Id == _courseId);
         Console.ForegroundColor = ConsoleColor.Gray;
         Console.WriteLine("\n* Комментарии к курсу " + currentCourse?.Title + " *\n\n" +
@@ -38,14 +36,14 @@ public record class CommentsMenu(int _courseId, User _user, WrongChoice _wrongCh
     {
         while (true)
         {
-            List<Comment> comments = _commentsService.Get(_courseId);
+            List<Comment> comments = _serviceProvider.commentsService.Get(_courseId);
             var commentsIds = comments.Select(x => x.Id.ToString()).ToList();
             string? choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "0":
-                    var coursesMenu = new CoursesMenu(_user, _wrongChoice);
+                    var coursesMenu = new CoursesMenu(_user, _serviceProvider);
                     coursesMenu.Display();
                     coursesMenu.HandleUserChoice();
                     return;
@@ -53,7 +51,7 @@ public record class CommentsMenu(int _courseId, User _user, WrongChoice _wrongCh
                     if (commentsIds.Contains(choice!))
                     {
                         var commentId = Convert.ToInt32(choice);
-                        var isCommentDeleted = _commentsService.Delete(commentId);
+                        var isCommentDeleted = _serviceProvider.commentsService.Delete(commentId);
                         if (isCommentDeleted)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -70,7 +68,7 @@ public record class CommentsMenu(int _courseId, User _user, WrongChoice _wrongCh
                     }
                     else
                     {
-                        _wrongChoice.PrintWrongChoiceMessage();
+                        _serviceProvider.wrongChoice.PrintWrongChoiceMessage();
                     }
                     break;
             }

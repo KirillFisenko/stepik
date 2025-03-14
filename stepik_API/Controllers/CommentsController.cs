@@ -1,16 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using stepik.Services;
 
 [ApiController]
 [Route("[controller]")]
-public class CommentsController : ControllerBase
+public class CommentsController(ICommentsService _commentsService) : ControllerBase
 {
-    private readonly CommentsService _commentsService;
-
-    public CommentsController()
-    {
-        _commentsService = new CommentsService();
-    }
-
     [HttpGet("GetCourseComments")]
     public IActionResult GetCourseComments(int id)
     {

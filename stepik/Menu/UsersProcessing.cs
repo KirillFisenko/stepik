@@ -1,7 +1,7 @@
-﻿public class UsersProcessing
-{
-    private readonly UsersService _usersService = new();
+﻿using stepik.Services;
 
+public class UsersProcessing(IUsersService _usersService)
+{
     public User PerformRegistration()
     {
         var userName = "";

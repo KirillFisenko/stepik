@@ -1,4 +1,8 @@
-﻿public partial class UsersService
+﻿using System.Data;
+
+namespace stepik.Services.EF;
+
+public class UsersService : IUsersService
 {
     /// <summary>
     /// Добавление нового пользователя в таблицу users
@@ -60,5 +64,15 @@
                 .Replace(".0K", "K");
             return formattedString;
         }
+    }
+
+    public DataSet GetUserRating()
+    {
+        throw new NotImplementedException();
+    }
+
+    public DataSet GetUserSocialInfo(string userName)
+    {
+        throw new NotImplementedException();
     }
 }

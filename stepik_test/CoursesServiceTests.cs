@@ -1,6 +1,8 @@
-﻿public class CoursesServiceTests
+﻿using stepik.Services;
+
+public class CoursesServiceTests
 {
-    private readonly CoursesService _coursesService = new();
+    private readonly ICoursesService _coursesService = new stepik.Services.ADO.NET.CoursesService();
 
     [Fact]
     public void Get_ShouldReturnListOfCourses_WhenUserExists()

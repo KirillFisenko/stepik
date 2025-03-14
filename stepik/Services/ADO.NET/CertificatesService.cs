@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
 
-public partial class CertificatesService
+namespace stepik.Services.ADO.NET;
+
+public class CertificatesService : ICertificatesService
 {
     /// <summary>
     /// Получение сертификатов пользователя

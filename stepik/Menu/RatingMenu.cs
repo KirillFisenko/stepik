@@ -1,9 +1,8 @@
-﻿using System.Data;
+﻿using stepik.Services;
+using System.Data;
 
-public record class RatingMenu(WrongChoice _wrongChoice)
+public record class RatingMenu(ServiceProvider _serviceProvider)
 {
-    private readonly UsersService _usersService = new();
-
     public void Display()
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
@@ -11,7 +10,7 @@ public record class RatingMenu(WrongChoice _wrongChoice)
                           "Выберите действие (введите число и нажмите Enter):\n" +
                           "1. Назад\n");
 
-        var dataSet = _usersService.GetUserRating();
+        var dataSet = _serviceProvider.usersService.GetUserRating();
 
         if (dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0)
         {
@@ -48,12 +47,12 @@ public record class RatingMenu(WrongChoice _wrongChoice)
             switch (choice)
             {
                 case "1":
-                    var mainMenu = new MainMenu();
+                    var mainMenu = new MainMenu(_serviceProvider);
                     mainMenu.Display();
                     mainMenu.HandleUserChoice();
                     return;
                 default:
-                    _wrongChoice.PrintWrongChoiceMessage();
+                    _serviceProvider.wrongChoice.PrintWrongChoiceMessage();
                     break;
             }
         }

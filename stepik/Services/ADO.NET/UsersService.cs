@@ -1,15 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
 
-public partial class UsersService
+namespace stepik.Services.ADO.NET;
+
+public class UsersService : IUsersService
 {
     /// <summary>
     /// Добавление нового пользователя в таблицу users
     /// </summary>
     /// <param name="user">Новый пользователь</param>
     /// <returns>Удалось ли добавить пользователя</returns>
-    [Obsolete("Метод ADO.NET устарел")]
-    public bool AddOld(User user)
+    public bool Add(User user)
     {
         try
         {
@@ -36,9 +37,8 @@ public partial class UsersService
     /// Получение пользователя из таблицы users
     /// </summary>
     /// <param name="fullName">Полное имя пользователя</param>
-    /// <returns>User</returns>   
-    [Obsolete("Метод ADO.NET устарел")]
-    public User? GetOld(string fullName)
+    /// <returns>User</returns>
+    public User? Get(string fullName)
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
@@ -65,8 +65,7 @@ public partial class UsersService
     /// <summary>
     /// Получение общего количества пользователей
     /// </summary>
-    [Obsolete("Метод ADO.NET устарел")]
-    public int GetTotalCountOld()
+    public int GetTotalCount()
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();
@@ -83,9 +82,8 @@ public partial class UsersService
     /// Форматирование показателей пользователя
     /// </summary>
     /// <param name="number">Число для форматирования</param>
-    /// <returns>Отформатированное число</returns>
-    [Obsolete("Метод ADO.NET устарел")]
-    public string? FormatUserMetricsOld(int number)
+    /// <returns>Отформатированное число</returns>    
+    public string? FormatUserMetrics(int number)
     {
         using var connection = new MySqlConnection(Constant.ConnectionString);
         connection.Open();

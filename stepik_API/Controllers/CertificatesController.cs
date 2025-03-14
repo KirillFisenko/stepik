@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using stepik.Services;
 using System.Data;
 
 [ApiController]
 [Route("[controller]")]
-public class CertificatesController : ControllerBase
+public class CertificatesController(ICertificatesService _certificatesService) : ControllerBase
 {
-    private readonly CertificatesService _certificatesService;
-
-    public CertificatesController()
-    {
-        _certificatesService = new CertificatesService();
-    }
-
     [HttpGet("GetUserCertificates")]
     public IActionResult GetUserCertificates(string fullName)
     {

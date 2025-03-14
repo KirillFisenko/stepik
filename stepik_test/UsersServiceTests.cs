@@ -1,8 +1,9 @@
-﻿using System.Data;
+﻿using stepik.Services;
+using System.Data;
 
 public class UsersServiceTests
 {
-    private readonly UsersService _usersService = new();
+    private readonly IUsersService _usersService = new stepik.Services.ADO.NET.UsersService();
 
     [Fact]
     public void Add_ShouldReturnTrue_WhenUserIsAdded()

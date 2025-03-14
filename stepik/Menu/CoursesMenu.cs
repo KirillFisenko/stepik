@@ -1,12 +1,11 @@
-﻿using System.Data;
+﻿using stepik.Services;
+using System.Data;
 
-public record class CoursesMenu(User _user, WrongChoice _wrongChoice)
+public record class CoursesMenu(User _user, ServiceProvider _serviceProvider)
 {
-    private readonly CoursesService _coursesService = new();
-
     public void Display()
     {
-        List<Course> courses = _coursesService.Get(_user.full_name);
+        List<Course> courses = _serviceProvider.coursesService.Get(_user.full_name);
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("\n* Список курсов " + _user.full_name + " *\n\n" +
                           "Выберите действие (введите число и нажмите Enter):\n" +
@@ -36,14 +35,14 @@ public record class CoursesMenu(User _user, WrongChoice _wrongChoice)
     {
         while (true)
         {
-            List<Course> courses = _coursesService.Get(_user.full_name);
+            List<Course> courses = _serviceProvider.coursesService.Get(_user.full_name);
             var coursesIds = courses.Select(x => x.Id.ToString()).ToList();
             string? choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "0":
-                    var userMenu = new UserMenu(_user, _wrongChoice);
+                    var userMenu = new UserMenu(_user, _serviceProvider);
                     userMenu.Display();
                     userMenu.HandleUserChoice();
                     return;
@@ -55,7 +54,7 @@ public record class CoursesMenu(User _user, WrongChoice _wrongChoice)
                     }
                     else
                     {
-                        _wrongChoice.PrintWrongChoiceMessage();
+                        _serviceProvider.wrongChoice.PrintWrongChoiceMessage();
                     }
                     break;
             }
@@ -64,7 +63,7 @@ public record class CoursesMenu(User _user, WrongChoice _wrongChoice)
 
     private void HandleUserCommentsMenu(int coursesId)
     {
-        var commentsMenu = new CommentsMenu(coursesId, _user, _wrongChoice);
+        var commentsMenu = new CommentsMenu(coursesId, _user, _serviceProvider);
         commentsMenu.Display();
         commentsMenu.HandleUserChoice();
     }

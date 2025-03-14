@@ -1,8 +1,9 @@
+using stepik.Services;
 using System.Data;
 
 public class CertificatesServiceTests
 {
-    private readonly CertificatesService _certificatesService = new();
+    private readonly ICertificatesService _certificatesService = new stepik.Services.ADO.NET.CertificatesService();
 
     [Fact]
     public void Get_ShouldReturnDataSet_WhenFullNameExists()
@@ -55,7 +56,7 @@ public static class DataSetExtensions
             {
                 var certificate = new Certificate
                 {
-                    Title = row["title"].ToString(),
+                    Title = row["title"].ToString() ?? string.Empty,
                     IssueDate = (DateTime)row["issue_date"],
                     Grade = (int)row["grade"]
                 };

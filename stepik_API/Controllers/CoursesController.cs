@@ -1,16 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using stepik.Services;
 
 [ApiController]
 [Route("[controller]")]
-public class CoursesController : ControllerBase
+public class CoursesController(ICoursesService _coursesService) : ControllerBase
 {
-    private readonly CoursesService _coursesService;
-
-    public CoursesController()
-    {
-        _coursesService = new CoursesService();
-    }
-
     [HttpGet("GetUserCourses")]
     public IActionResult GetUserCourses(string fullName)
     {

@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 
-public partial class CommentsService
+namespace stepik.Services.ADO.NET;
+
+public class CommentsService : ICommentsService
 {
     /// <summary>
     /// Получение всех комментариев к курсу

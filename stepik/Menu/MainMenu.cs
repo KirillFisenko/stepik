@@ -1,14 +1,11 @@
-﻿public class MainMenu
-{
-    private readonly WrongChoice _wrongChoice = new();
-    private readonly UsersService _usersService = new();
-    private readonly CoursesService _coursesService = new();
-    private readonly UsersProcessing _usersProcessing = new();
+﻿using stepik.Services;
 
+public class MainMenu(ServiceProvider serviceProvider)
+{
     public void Display()
     {
-        var totalCoursesCount = _coursesService.GetTotalCount();
-        var totalUsersCount = _usersService.GetTotalCount();
+        var totalCoursesCount = serviceProvider.coursesService.GetTotalCount();
+        var totalUsersCount = serviceProvider.usersService.GetTotalCount();
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine("************************************************\n" +
                           "* Добро пожаловать на онлайн платформу Stepik! *\n" +
@@ -33,7 +30,7 @@
             switch (choice)
             {
                 case "1":
-                    User user = _usersProcessing.PerformLogin();
+                    User user = serviceProvider.usersProcessing.PerformLogin();
                     if (!string.IsNullOrEmpty(user?.full_name))
                     {
                         HandleUserMenu(user);
@@ -41,7 +38,7 @@
                     Display();
                     break;
                 case "2":
-                    User newUser = _usersProcessing.PerformRegistration();
+                    User newUser = serviceProvider.usersProcessing.PerformRegistration();
                     if (!string.IsNullOrEmpty(newUser?.full_name))
                     {
                         HandleUserMenu(newUser);
@@ -57,7 +54,7 @@
                     Environment.Exit(0);
                     break;
                 default:
-                    _wrongChoice.PrintWrongChoiceMessage();
+                    serviceProvider.wrongChoice.PrintWrongChoiceMessage();
                     break;
             }
         }
@@ -65,14 +62,14 @@
 
     private void HandleUserMenu(User user)
     {
-        var userMenu = new UserMenu(user, _wrongChoice);
+        var userMenu = new UserMenu(user, serviceProvider);
         userMenu.Display();
         userMenu.HandleUserChoice();
     }
 
     private void HandleUserRatingMenu()
     {
-        var ratingMenu = new RatingMenu(_wrongChoice);
+        var ratingMenu = new RatingMenu(serviceProvider);
         ratingMenu.Display();
         ratingMenu.HandleUserChoice();
     }

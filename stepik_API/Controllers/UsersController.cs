@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using stepik.Services;
 using System.Data;
 
 [ApiController]
 [Route("[controller]")]
-public class UsersController : ControllerBase
+public class UsersController(IUsersService _usersService) : ControllerBase
 {
-    private readonly UsersService _usersService;
-
-    public UsersController(UsersService usersService)
-    {
-        _usersService = usersService;
-    }
-
     [HttpPost("AddUser")]
     public IActionResult AddUser(User user)
     {
