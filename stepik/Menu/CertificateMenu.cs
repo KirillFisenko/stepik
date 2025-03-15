@@ -1,11 +1,11 @@
 ﻿using stepik.Services;
 using System.Data;
 
-public record class CertificateMenu(User _user, ServiceProvider serviceProvider)
+public record class CertificateMenu(User _user, ServiceProvider _serviceProvider)
 {
     public void Display()
     {
-        var certificates = serviceProvider.certificatesService.Get(_user.full_name);
+        var certificates = _serviceProvider.certificatesService.Get(_user.full_name);
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("\n* Сертификаты пользователя " + _user.full_name + " *\n\n" +
                           "Выберите действие (введите число и нажмите Enter):\n" +
@@ -46,12 +46,12 @@ public record class CertificateMenu(User _user, ServiceProvider serviceProvider)
             switch (choice)
             {
                 case "1":
-                    var userMenu = new UserMenu(_user, serviceProvider);
+                    var userMenu = new UserMenu(_user, _serviceProvider);
                     userMenu.Display();
                     userMenu.HandleUserChoice();
                     return;
                 default:
-                    serviceProvider.wrongChoice.PrintWrongChoiceMessage();
+                    _serviceProvider.wrongChoice.PrintWrongChoiceMessage();
                     break;
             }
         }

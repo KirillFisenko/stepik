@@ -1,11 +1,11 @@
 ﻿using stepik.Services;
 
-public class MainMenu(ServiceProvider serviceProvider)
+public class MainMenu(ServiceProvider _serviceProvider)
 {
     public void Display()
     {
-        var totalCoursesCount = serviceProvider.coursesService.GetTotalCount();
-        var totalUsersCount = serviceProvider.usersService.GetTotalCount();
+        var totalCoursesCount = _serviceProvider.coursesService.GetTotalCount();
+        var totalUsersCount = _serviceProvider.usersService.GetTotalCount();
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine("************************************************\n" +
                           "* Добро пожаловать на онлайн платформу Stepik! *\n" +
@@ -30,7 +30,7 @@ public class MainMenu(ServiceProvider serviceProvider)
             switch (choice)
             {
                 case "1":
-                    User user = serviceProvider.usersProcessing.PerformLogin();
+                    User user = _serviceProvider.usersProcessing.PerformLogin();
                     if (!string.IsNullOrEmpty(user?.full_name))
                     {
                         HandleUserMenu(user);
@@ -38,7 +38,7 @@ public class MainMenu(ServiceProvider serviceProvider)
                     Display();
                     break;
                 case "2":
-                    User newUser = serviceProvider.usersProcessing.PerformRegistration();
+                    User newUser = _serviceProvider.usersProcessing.PerformRegistration();
                     if (!string.IsNullOrEmpty(newUser?.full_name))
                     {
                         HandleUserMenu(newUser);
@@ -54,7 +54,7 @@ public class MainMenu(ServiceProvider serviceProvider)
                     Environment.Exit(0);
                     break;
                 default:
-                    serviceProvider.wrongChoice.PrintWrongChoiceMessage();
+                    _serviceProvider.wrongChoice.PrintWrongChoiceMessage();
                     break;
             }
         }
@@ -62,14 +62,14 @@ public class MainMenu(ServiceProvider serviceProvider)
 
     private void HandleUserMenu(User user)
     {
-        var userMenu = new UserMenu(user, serviceProvider);
+        var userMenu = new UserMenu(user, _serviceProvider);
         userMenu.Display();
         userMenu.HandleUserChoice();
     }
 
     private void HandleUserRatingMenu()
     {
-        var ratingMenu = new RatingMenu(serviceProvider);
+        var ratingMenu = new RatingMenu(_serviceProvider);
         ratingMenu.Display();
         ratingMenu.HandleUserChoice();
     }
