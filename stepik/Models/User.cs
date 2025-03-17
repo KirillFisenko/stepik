@@ -12,4 +12,12 @@
     public int days_without_break { get; set; }
     public int days_without_break_max { get; set; }
     public int solved_tasks { get; set; }
+
+    //public ICollection<UserCourse> UserCourses { get; set; }
+    //public ICollection<CourseAuthor> CourseAuthors { get; set; }
+    //public ICollection<Certificate> Certificates { get; set; }
+    //public ICollection<UserSocialProvider> UserSocialProviders { get; set; }
+    //public ICollection<Progress> Progresses { get; set; }
+    //public ICollection<Comment> Comments { get; set; }
+    //public ICollection<CourseReview> CourseReviews { get; set; }
 }
