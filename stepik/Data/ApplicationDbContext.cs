@@ -19,8 +19,6 @@ public class ApplicationDbContext : DbContext
     //public DbSet<Comment> Comments { get; set; }
     //public DbSet<CourseReview> CourseReviews { get; set; }
 
-    public ApplicationDbContext() { }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var config = new ConfigurationBuilder()
@@ -29,24 +27,5 @@ public class ApplicationDbContext : DbContext
 
         var connectionString = config.GetConnectionString("DefaultConnection");
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-    }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        //modelBuilder.ApplyConfiguration(new UserConfiguration());
-        //modelBuilder.ApplyConfiguration(new CourseConfiguration());
-        //modelBuilder.ApplyConfiguration(new UserCourseConfiguration());
-        //modelBuilder.ApplyConfiguration(new CourseAuthorConfiguration());
-        //modelBuilder.ApplyConfiguration(new CertificateConfiguration());
-        //modelBuilder.ApplyConfiguration(new SocialProviderConfiguration());
-        //modelBuilder.ApplyConfiguration(new UserSocialProviderConfiguration());
-        //modelBuilder.ApplyConfiguration(new CertificateSettingConfiguration());
-        //modelBuilder.ApplyConfiguration(new UnitConfiguration());
-        //modelBuilder.ApplyConfiguration(new LessonConfiguration());
-        //modelBuilder.ApplyConfiguration(new UnitLessonConfiguration());
-        //modelBuilder.ApplyConfiguration(new StepConfiguration());
-        //modelBuilder.ApplyConfiguration(new ProgressConfiguration());
-        //modelBuilder.ApplyConfiguration(new CommentConfiguration());
-        //modelBuilder.ApplyConfiguration(new CourseReviewConfiguration());
     }
 }
