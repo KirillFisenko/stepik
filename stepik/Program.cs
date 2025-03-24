@@ -1,11 +1,8 @@
-﻿using stepik.Services;
-
-public class Program
+﻿public class Program
 {
     public static void Main()
     {
-        ServiceProvider serviceProvider = new();
-        var menu = new MainMenu(serviceProvider);
+        var menu = new MainMenu();
         menu.Display();
         menu.HandleUserChoice();
     }

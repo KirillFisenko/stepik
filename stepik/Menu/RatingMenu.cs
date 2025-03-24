@@ -1,7 +1,7 @@
 ﻿using stepik.Services;
 using System.Data;
 
-public record class RatingMenu(ServiceProvider _serviceProvider)
+public record class RatingMenu()
 {
     public void Display()
     {
@@ -10,7 +10,7 @@ public record class RatingMenu(ServiceProvider _serviceProvider)
                           "Выберите действие (введите число и нажмите Enter):\n" +
                           "1. Назад\n");
 
-        var dataSet = _serviceProvider.usersService.GetUserRating();
+        var dataSet = ServiceProvider.usersService.GetUserRating();
 
         if (dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0)
         {
@@ -47,12 +47,12 @@ public record class RatingMenu(ServiceProvider _serviceProvider)
             switch (choice)
             {
                 case "1":
-                    var mainMenu = new MainMenu(_serviceProvider);
+                    var mainMenu = new MainMenu();
                     mainMenu.Display();
                     mainMenu.HandleUserChoice();
                     return;
                 default:
-                    _serviceProvider.wrongChoice.PrintWrongChoiceMessage();
+                    ServiceProvider.wrongChoice.PrintWrongChoiceMessage();
                     break;
             }
         }
