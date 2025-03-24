@@ -1,6 +1,6 @@
 ﻿using stepik.Services;
 
-public record class UserMenu(User _user, ServiceProvider _serviceProvider)
+public record class UserMenu(User _user)
 {
     public void Display()
     {
@@ -32,12 +32,12 @@ public record class UserMenu(User _user, ServiceProvider _serviceProvider)
                     HandleUserCertificateMenu();
                     break;
                 case "4":
-                    var mainMenu = new MainMenu(_serviceProvider);
+                    var mainMenu = new MainMenu();
                     mainMenu.Display();
                     mainMenu.HandleUserChoice();
                     return;
                 default:
-                    _serviceProvider.wrongChoice.PrintWrongChoiceMessage();
+                    ServiceProvider.wrongChoice.PrintWrongChoiceMessage();
                     break;
             }
         }
@@ -45,21 +45,21 @@ public record class UserMenu(User _user, ServiceProvider _serviceProvider)
 
     private void HandleProfileMenu()
     {
-        var profileMenu = new ProfileMenu(_user, _serviceProvider);
+        var profileMenu = new ProfileMenu(_user);
         profileMenu.Display();
         profileMenu.HandleUserChoice();
     }
 
     private void HandleUserCoursesMenu()
     {
-        var coursesMenu = new CoursesMenu(_user, _serviceProvider);
+        var coursesMenu = new CoursesMenu(_user);
         coursesMenu.Display();
         coursesMenu.HandleUserChoice();
     }
 
     private void HandleUserCertificateMenu()
     {
-        var certificateMenu = new CertificateMenu(_user, _serviceProvider);
+        var certificateMenu = new CertificateMenu(_user);
         certificateMenu.Display();
         certificateMenu.HandleUserChoice();
     }
