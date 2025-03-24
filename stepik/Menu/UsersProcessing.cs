@@ -1,6 +1,6 @@
 ﻿using stepik.Services;
 
-public class UsersProcessing(IUsersService _usersService)
+public class UsersProcessing()
 {
     public User PerformRegistration()
     {
@@ -16,7 +16,7 @@ public class UsersProcessing(IUsersService _usersService)
             full_name = userName
         };
 
-        bool isAdditionSuccessful = _usersService.Add(newUser);
+        bool isAdditionSuccessful = ServiceProvider.usersService.Add(newUser);
 
         if (isAdditionSuccessful)
         {
@@ -43,7 +43,7 @@ public class UsersProcessing(IUsersService _usersService)
             userName = Console.ReadLine();
         }
 
-        User? user = _usersService.Get(userName);
+        User? user = ServiceProvider.usersService.Get(userName);
 
         if (user != null)
         {
