@@ -11,9 +11,9 @@ public class CertificatesServiceTests
         // Arrange
         var expectedCertificates = new List<Certificate>
         {
-            new Certificate { Title = "PHP дл€ начинающих", IssueDate = new DateTime(2021, 1, 19), Grade = 70 },
-            new Certificate { Title = "¬ведение в HTML и CSS", IssueDate = new DateTime(2021, 1, 12), Grade = 85 },
-            new Certificate { Title = "JavaScript дл€ начинающих", IssueDate = new DateTime(2021, 1, 5), Grade = 95 }
+            new Certificate { Course = new Course() { Title = "PHP дл€ начинающих" }, IssueDate = new DateTime(2021, 1, 19), Grade = 70 },
+            new Certificate { Course = new Course() { Title = "¬ведение в HTML и CSS" }, IssueDate = new DateTime(2021, 1, 12), Grade = 85 },
+            new Certificate { Course = new Course() { Title = "JavaScript дл€ начинающих" }, IssueDate = new DateTime(2021, 1, 5), Grade = 95 }
         };
 
         // Act
@@ -23,7 +23,7 @@ public class CertificatesServiceTests
         // Assert
         for (int i = 0; i < expectedCertificates.Count; i++)
         {
-            Assert.Equal(expectedCertificates[i].Title, resultCertificates[i].Title);
+            Assert.Equal(expectedCertificates[i].Course.Title, resultCertificates[i].Course.Title);
             Assert.Equal(expectedCertificates[i].IssueDate, resultCertificates[i].IssueDate);
             Assert.Equal(expectedCertificates[i].Grade, resultCertificates[i].Grade);
         }
@@ -56,7 +56,7 @@ public static class DataSetExtensions
             {
                 var certificate = new Certificate
                 {
-                    Title = row["title"].ToString() ?? string.Empty,
+                    Course = new Course() { Title = row["title"].ToString() ?? string.Empty },
                     IssueDate = (DateTime)row["issue_date"],
                     Grade = (int)row["grade"]
                 };

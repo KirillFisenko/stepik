@@ -16,14 +16,47 @@ public class UsersService : IUsersService
         {
             using var connection = new MySqlConnection(Constant.ConnectionString);
             connection.Open();
-            var query = @"INSERT INTO users (full_name, details, join_date, avatar, is_active)
-                          VALUES (@FullName, @Details, @JoinDate, @Avatar, @IsActive)";
+            var query = @"
+            INSERT INTO users (
+                full_name,
+                details,
+                join_date,
+                avatar,
+                is_active,
+                knowledge,
+                reputation,
+                followers_count,
+                days_without_break,
+                days_without_break_max,
+                solved_tasks
+            )
+            VALUES (
+                @FullName,
+                @Details,
+                @JoinDate,
+                @Avatar,
+                @IsActive,
+                @Knowledge,
+                @Reputation,
+                @FollowersCount,
+                @DaysWithoutBreak,
+                @DaysWithoutBreakMax,
+                @SolvedTasks
+            )";
+
             using var command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@FullName", user.full_name);
-            command.Parameters.AddWithValue("@Details", user.details);
-            command.Parameters.AddWithValue("@JoinDate", user.join_date);
-            command.Parameters.AddWithValue("@Avatar", user.avatar);
-            command.Parameters.AddWithValue("@IsActive", user.is_active);
+            command.Parameters.AddWithValue("@FullName", user.FullName);
+            command.Parameters.AddWithValue("@Details", user.Details ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@JoinDate", user.JoinDate);
+            command.Parameters.AddWithValue("@Avatar", user.Avatar ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@IsActive", user.IsActive);
+            command.Parameters.AddWithValue("@Knowledge", user.Knowledge);
+            command.Parameters.AddWithValue("@Reputation", user.Reputation);
+            command.Parameters.AddWithValue("@FollowersCount", user.FollowersCount);
+            command.Parameters.AddWithValue("@DaysWithoutBreak", user.DaysWithoutBreak);
+            command.Parameters.AddWithValue("@DaysWithoutBreakMax", user.DaysWithoutBreakMax);
+            command.Parameters.AddWithValue("@SolvedTasks", user.SolvedTasks);
+
             var rowsAffected = command.ExecuteNonQuery();
             return rowsAffected == 1;
         }
@@ -32,6 +65,7 @@ public class UsersService : IUsersService
             return false;
         }
     }
+
 
     /// <summary>
     /// Получение пользователя из таблицы users
@@ -50,14 +84,14 @@ public class UsersService : IUsersService
         return reader.Read()
             ? new User
             {
-                full_name = reader.GetString("full_name"),
-                details = reader.IsDBNull("details") ? null : reader.GetString("details"),
-                join_date = reader.GetDateTime("join_date"),
-                avatar = reader.IsDBNull("avatar") ? null : reader.GetString("avatar"),
-                is_active = reader.GetBoolean("is_active"),
-                knowledge = reader.GetInt32("knowledge"),
-                reputation = reader.GetInt32("reputation"),
-                followers_count = reader.GetInt32("followers_count")
+                FullName = reader.GetString("full_name"),
+                Details = reader.IsDBNull("details") ? null : reader.GetString("details"),
+                JoinDate = reader.GetDateTime("join_date"),
+                Avatar = reader.IsDBNull("avatar") ? null : reader.GetString("avatar"),
+                IsActive = reader.GetBoolean("is_active"),
+                Knowledge = reader.GetInt32("knowledge"),
+                Reputation = reader.GetInt32("reputation"),
+                FollowersCount = reader.GetInt32("followers_count")
             }
             : null;
     }

@@ -31,7 +31,7 @@ public class MainMenu()
             {
                 case "1":
                     User user = ServiceProvider.usersProcessing.PerformLogin();
-                    if (!string.IsNullOrEmpty(user?.full_name))
+                    if (!string.IsNullOrEmpty(user?.FullName))
                     {
                         HandleUserMenu(user);
                     }
@@ -39,7 +39,7 @@ public class MainMenu()
                     break;
                 case "2":
                     User newUser = ServiceProvider.usersProcessing.PerformRegistration();
-                    if (!string.IsNullOrEmpty(newUser?.full_name))
+                    if (!string.IsNullOrEmpty(newUser?.FullName))
                     {
                         HandleUserMenu(newUser);
                     }
