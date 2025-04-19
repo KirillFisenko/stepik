@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 [Table("certificate_settings")]
 public class CertificateSetting
 {
-    [Key]
+    [Key, ForeignKey(nameof(CourseId))]
     [Column("course_id")]
     public int CourseId { get; set; }
 
