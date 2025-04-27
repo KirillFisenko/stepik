@@ -24,6 +24,5 @@ public class CertificateSetting
     public int ExcellentThreshold { get; set; }
 
 
-    [ForeignKey("CourseId")]
     public Course Course { get; set; }
 }

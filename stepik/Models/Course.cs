@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("courses")]
 public class Course
@@ -7,6 +8,7 @@ public class Course
     public int Id { get; set; }
 
     [Column("title")]
+    [StringLength(50)]
     public string Title { get; set; }
 
     [Column("created_date")]

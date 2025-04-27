@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 public class ApplicationDbContext : DbContext
 {
@@ -32,6 +33,7 @@ public class ApplicationDbContext : DbContext
             .Build();
 
         var connectionString = config.GetConnectionString("DefaultConnection");
-        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                      .LogTo(Console.WriteLine, LogLevel.Information);
     }
 }
