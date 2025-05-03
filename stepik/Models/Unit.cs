@@ -6,15 +6,13 @@ public class Unit
     [Column("id")]
     public int Id { get; set; }
 
+    [ForeignKey(nameof(CourseId))]
     [Column("course_id")]
     public int CourseId { get; set; }
 
     [Column("title")]
     public string? Title { get; set; }
 
-
-    [ForeignKey("CourseId")]
     public Course Course { get; set; }
-
     public List<UnitLesson> UnitLessons { get; set; }
 }

@@ -5,9 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 [Table("certificates")]
 public class Certificate
 {
+    [ForeignKey(nameof(UserId))]
     [Column("user_id")]
     public int UserId { get; set; }
 
+    [ForeignKey(nameof(CourseId))]
     [Column("course_id")]
     public int CourseId { get; set; }
 
@@ -20,10 +22,6 @@ public class Certificate
     [Column("url")]
     public string Url { get; set; }
 
-
-    [ForeignKey("UserId")]
     public User User { get; set; }
-
-    [ForeignKey("CourseId")]
     public Course Course { get; set; }
 }
