@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("users")]
 public class User
@@ -7,9 +8,11 @@ public class User
     public int Id { get; set; }
 
     [Column("full_name")]
+    [StringLength(50)]
     public string FullName { get; set; }
 
     [Column("details")]
+    [StringLength(50)]
     public string? Details { get; set; }
 
     [Column("join_date")]

@@ -22,8 +22,8 @@ public class ApplicationDbContext : DbContext
 
     public ApplicationDbContext()
     {
-        Database.EnsureDeleted();
-        Database.EnsureCreated();
+        //Database.EnsureDeleted();
+        //Database.EnsureCreated();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
