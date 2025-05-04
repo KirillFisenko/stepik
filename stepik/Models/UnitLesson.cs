@@ -11,10 +11,6 @@ public class UnitLesson
     [Column("lesson_id")]
     public int LessonId { get; set; }
 
-
-    [ForeignKey("UnitId")]
     public Unit Unit { get; set; }
-
-    [ForeignKey("LessonId")]
     public Lesson Lesson { get; set; }
 }

@@ -12,6 +12,5 @@ public class SocialProvider
     [Column("logo_url")]
     public string LogoUrl { get; set; }
 
-
     public List<UserSocialProvider> UserSocialProviders { get; set; }
 }

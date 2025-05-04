@@ -30,12 +30,7 @@ public class CourseReview
     public int AbuseCount { get; set; }
 
 
-    [ForeignKey("CourseId")]
     public Course Course { get; set; }
-
-    [ForeignKey("UserId")]
     public User User { get; set; }
-
-    [ForeignKey("CommentId")]
     public Comment Comment { get; set; }
 }

@@ -17,10 +17,6 @@ public class Progress
     [Column("score")]
     public int Score { get; set; }
 
-
-    [ForeignKey("UserId")]
     public User User { get; set; }
-
-    [ForeignKey("StepId")]
     public Step Step { get; set; }
 }

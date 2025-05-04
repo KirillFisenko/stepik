@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Globalization;
 
 namespace stepik.Services.EF;
@@ -26,6 +27,30 @@ public class UsersService : IUsersService
     }
 
     /// <summary>
+    /// Получение пользователя из таблицы users
+    /// </summary>
+    /// <param name="fullName">Полное имя пользователя</param>
+    /// <returns>User</returns>    
+    public User? Get(string fullName)
+    {
+        using ApplicationDbContext dbContext = new();
+        return dbContext.Users
+            .AsNoTracking()
+            .FirstOrDefault(u => u.FullName == fullName && u.IsActive);
+    }
+
+    /// <summary>
+    /// Получение общего количества пользователей
+    /// </summary>
+    public int GetTotalCount()
+    {
+        using ApplicationDbContext dbContext = new();
+        return dbContext.Users
+            .AsNoTracking()
+            .Count();
+    }
+
+    /// <summary>
     /// Форматирование показателей пользователя
     /// </summary>
     /// <param name="number">Число для форматирования</param>
@@ -47,27 +72,6 @@ public class UsersService : IUsersService
     }
 
     /// <summary>
-    /// Получение пользователя из таблицы users
-    /// </summary>
-    /// <param name="fullName">Полное имя пользователя</param>
-    /// <returns>User</returns>    
-    public User? Get(string fullName)
-    {
-        using ApplicationDbContext dbContext = new();
-        return dbContext.Users
-            .FirstOrDefault(u => u.FullName == fullName && u.IsActive);
-    }
-
-    /// <summary>
-    /// Получение общего количества пользователей
-    /// </summary>
-    public int GetTotalCount()
-    {
-        using ApplicationDbContext dbContext = new();
-        return dbContext.Users.Count();
-    }
-
-    /// <summary>
     /// Рейтинг пользователей (топ-10 по знаниям)
     /// </summary>
     /// <returns>DataSet</returns>
@@ -77,6 +81,7 @@ public class UsersService : IUsersService
 
         var topUsers = dbContext.Users
             .Where(u => u.IsActive)
+            .AsNoTracking()
             .OrderByDescending(u => u.Knowledge)
             .Take(10)
             .Select(u => new
@@ -110,7 +115,31 @@ public class UsersService : IUsersService
     public DataSet GetUserSocialInfo(string userName)
     {
         using var dbContext = new ApplicationDbContext();
+
+        var socialInfos = (
+            from u in dbContext.Users
+            join usp in dbContext.UserSocialProviders on u.Id equals usp.UserId
+            join sp in dbContext.SocialProviders on usp.SocialProviderId equals sp.Id
+            where u.FullName == userName
+            orderby sp.Name
+            select new
+            {
+                sp.Name,
+                usp.ConnectUrl
+            }
+        ).ToList();
+
+        var dataTable = new DataTable("user_social_providers");
+        dataTable.Columns.Add("name", typeof(string));
+        dataTable.Columns.Add("connect_url", typeof(string));
+
+        foreach (var info in socialInfos)
+        {
+            dataTable.Rows.Add(info.Name, info.ConnectUrl);
+        }
+
         var dataSet = new DataSet();
+        dataSet.Tables.Add(dataTable);
         return dataSet;
     }
 }

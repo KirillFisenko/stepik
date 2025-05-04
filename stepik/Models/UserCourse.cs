@@ -23,10 +23,6 @@ public class UserCourse
     [Column("last_viewed")]
     public DateTime LastViewed { get; set; }
 
-
-    [ForeignKey("UserId")]
     public User User { get; set; }
-
-    [ForeignKey("CourseId")]
     public Course Course { get; set; }
 }

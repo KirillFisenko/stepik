@@ -28,14 +28,9 @@ public class Comment
     public int AbuseCount { get; set; }
 
 
-    [ForeignKey("StepId")]
     public Step Step { get; set; }
-
-    [ForeignKey("ReplyCommentId")]
     public Comment ReplyComment { get; set; }
-
-    [ForeignKey("UserId")]
+    public List<Comment> ReplyComments { get; set; }
     public User User { get; set; }
-
-    public List<CourseReview> CourseReviews { get; set; }
+    public CourseReview CourseReview { get; set; }
 }

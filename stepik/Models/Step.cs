@@ -21,8 +21,6 @@ public class Step
     [Column("cost")]
     public int Cost { get; set; }
 
-
-    [ForeignKey("LessonId")]
     public Lesson Lesson { get; set; }
     public List<Progress> Progresses { get; set; }
     public List<Comment> Comments { get; set; }

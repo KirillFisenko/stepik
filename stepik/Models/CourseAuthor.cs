@@ -11,10 +11,6 @@ public class CourseAuthor
     [Column("user_id")]
     public int UserId { get; set; }
 
-
-    [ForeignKey("CourseId")]
     public Course Course { get; set; }
-
-    [ForeignKey("UserId")]
     public User User { get; set; }
 }

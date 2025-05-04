@@ -6,7 +6,6 @@ public class Unit
     [Column("id")]
     public int Id { get; set; }
 
-    [ForeignKey(nameof(CourseId))]
     [Column("course_id")]
     public int CourseId { get; set; }
 
