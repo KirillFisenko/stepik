@@ -37,8 +37,6 @@ public class CommentsService : ICommentsService
         {
             using ApplicationDbContext dbContext = new();
 
-            using var transaction = dbContext.Database.BeginTransaction();
-
             var courseReviews = dbContext.CourseReviews.Where(cr => cr.CommentId == id);
             dbContext.CourseReviews.RemoveRange(courseReviews);
 
@@ -52,7 +50,6 @@ public class CommentsService : ICommentsService
             }
 
             dbContext.SaveChanges();
-            transaction.Commit();
 
             return true;
         }

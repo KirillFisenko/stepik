@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 public class ApplicationDbContext : DbContext
 {
@@ -20,12 +19,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<Comment> Comments { get; set; }
     public DbSet<CourseReview> CourseReviews { get; set; }
 
-    public ApplicationDbContext()
-    {
-        //Database.EnsureDeleted();
-        //Database.EnsureCreated();
-    }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var config = new ConfigurationBuilder()
@@ -33,7 +26,6 @@ public class ApplicationDbContext : DbContext
             .Build();
 
         var connectionString = config.GetConnectionString("DefaultConnection");
-        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-                      .LogTo(Console.WriteLine, LogLevel.Information);
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 }

@@ -5,10 +5,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<ICertificatesService, stepik.Services.ADO.NET.CertificatesService>();
-builder.Services.AddTransient<ICommentsService, stepik.Services.ADO.NET.CommentsService>();
-builder.Services.AddTransient<ICoursesService, stepik.Services.ADO.NET.CoursesService>();
-builder.Services.AddTransient<IUsersService, stepik.Services.ADO.NET.UsersService>();
+builder.Services.AddTransient<ICertificatesService, stepik.Services.EF.CertificatesService>();
+builder.Services.AddTransient<ICommentsService, stepik.Services.EF.CommentsService>();
+builder.Services.AddTransient<ICoursesService, stepik.Services.EF.CoursesService>();
+builder.Services.AddTransient<IUsersService, stepik.Services.EF.UsersService>();
 
 var app = builder.Build();
 app.UseSwagger();

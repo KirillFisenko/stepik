@@ -2,7 +2,7 @@
 
 public class CommentsServiceTests
 {
-    private readonly ICommentsService _commentsService = new stepik.Services.ADO.NET.CommentsService();
+    private readonly ICommentsService _commentsService = new stepik.Services.EF.CommentsService();
 
     [Fact]
     public void Get_ShouldReturnListOfComments_WhenCourseIdExists()
