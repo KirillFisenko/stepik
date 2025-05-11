@@ -2,7 +2,7 @@
 
 public class CoursesServiceTests
 {
-    private readonly ICoursesService _coursesService = new stepik.Services.EF.CoursesService();
+    private readonly ICoursesService _coursesService = ServiceProvider.coursesService;
 
     [Fact]
     public void Get_ShouldReturnListOfCourses_WhenUserExists()

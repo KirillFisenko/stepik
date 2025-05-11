@@ -3,7 +3,7 @@ using System.Data;
 
 public class UsersServiceTests
 {
-    private readonly IUsersService _usersService = new stepik.Services.EF.UsersService();
+    private readonly IUsersService _usersService = ServiceProvider.usersService;
 
     [Fact]
     public void Add_ShouldReturnTrue_WhenUserIsAdded()

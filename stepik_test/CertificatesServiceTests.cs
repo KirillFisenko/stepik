@@ -3,7 +3,7 @@ using System.Data;
 
 public class CertificatesServiceTests
 {
-    private readonly ICertificatesService _certificatesService = new stepik.Services.EF.CertificatesService();
+    private readonly ICertificatesService _certificatesService = ServiceProvider.certificatesService;
 
     [Fact]
     public void Get_ShouldReturnDataSet_WhenFullNameExists()
