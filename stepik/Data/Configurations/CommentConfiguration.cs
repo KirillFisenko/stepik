@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 public class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
@@ -10,8 +10,7 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         builder.HasKey(c => c.Id);
 
         builder.Property(c => c.Id)
-            .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .HasColumnName("id");
 
         builder.Property(c => c.StepId)
             .HasColumnName("step_id");

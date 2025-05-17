@@ -10,8 +10,7 @@ public class CertificateSettingConfiguration : IEntityTypeConfiguration<Certific
         builder.HasKey(cs => cs.CourseId);
 
         builder.Property(cs => cs.CourseId)
-            .HasColumnName("course_id")
-            .ValueGeneratedNever();
+            .HasColumnName("course_id");
 
         builder.Property(cs => cs.LogoUrl)
             .HasColumnName("logo_url");

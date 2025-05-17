@@ -10,8 +10,7 @@ public class StepConfiguration : IEntityTypeConfiguration<Step>
         builder.HasKey(s => s.Id);
 
         builder.Property(s => s.Id)
-            .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .HasColumnName("id");
 
         builder.Property(s => s.LessonId)
             .HasColumnName("lesson_id");

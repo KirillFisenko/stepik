@@ -10,8 +10,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasKey(u => u.Id);
 
         builder.Property(u => u.Id)
-            .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .HasColumnName("id");
 
         builder.Property(u => u.FullName)
             .HasColumnName("full_name")

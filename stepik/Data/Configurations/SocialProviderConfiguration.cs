@@ -10,8 +10,7 @@ public class SocialProviderConfiguration : IEntityTypeConfiguration<SocialProvid
         builder.HasKey(sp => sp.Id);
 
         builder.Property(sp => sp.Id)
-            .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .HasColumnName("id");
 
         builder.Property(sp => sp.Name)
             .HasColumnName("name");

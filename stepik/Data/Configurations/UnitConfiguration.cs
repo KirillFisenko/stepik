@@ -10,8 +10,7 @@ public class UnitConfiguration : IEntityTypeConfiguration<Unit>
         builder.HasKey(u => u.Id);
 
         builder.Property(u => u.Id)
-            .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .HasColumnName("id");
 
         builder.Property(u => u.CourseId)
             .HasColumnName("course_id");

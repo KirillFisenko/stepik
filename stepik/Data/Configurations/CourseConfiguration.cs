@@ -10,8 +10,7 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
         builder.HasKey(c => c.Id);
 
         builder.Property(c => c.Id)
-            .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .HasColumnName("id");
 
         builder.Property(c => c.Title)
             .HasColumnName("title")
