@@ -33,10 +33,11 @@ public class CommentsService : ICommentsService
     /// <returns>Удалось ли удалить комментарий</returns>
     public bool Delete(int id)
     {
+        using ApplicationDbContext dbContext = new();
+        using var transaction = dbContext.Database.BeginTransaction();
+
         try
         {
-            using ApplicationDbContext dbContext = new();
-
             var courseReviews = dbContext.CourseReviews.Where(cr => cr.CommentId == id);
             dbContext.CourseReviews.RemoveRange(courseReviews);
 
@@ -50,11 +51,12 @@ public class CommentsService : ICommentsService
             }
 
             dbContext.SaveChanges();
-
+            transaction.Commit();
             return true;
         }
         catch (Exception)
         {
+            transaction.Rollback();
             return false;
         }
     }
