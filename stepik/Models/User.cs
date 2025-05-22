@@ -12,6 +12,7 @@
     public int DaysWithoutBreak { get; set; }
     public int DaysWithoutBreakMax { get; set; }
     public int SolvedTasks { get; set; }
+    public string? AboutMe { get; set; }
 
     public List<UserCourse> UserCourses { get; set; }
     public List<CourseAuthor> CourseAuthors { get; set; }

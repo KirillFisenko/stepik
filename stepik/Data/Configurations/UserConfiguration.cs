@@ -46,5 +46,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.SolvedTasks)
             .HasColumnName("solved_tasks");
+
+        builder.Property(u => u.AboutMe)
+            .HasColumnName("about_me");
     }
 }
