@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 public class NewsConfiguration : IEntityTypeConfiguration<News>
 {
     public void Configure(EntityTypeBuilder<News> builder)
