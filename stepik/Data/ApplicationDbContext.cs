@@ -20,6 +20,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Progress> Progresses { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<CourseReview> CourseReviews { get; set; }
+    public DbSet<News> News { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
