@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -17,31 +17,31 @@ namespace stepik.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Certificate", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
                     b.Property<int>("CourseId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("course_id");
 
                     b.Property<int>("Grade")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("grade");
 
                     b.Property<DateTime>("IssueDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("issue_date");
 
                     b.Property<string>("Url")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("url");
 
                     b.HasKey("UserId", "CourseId");
@@ -56,7 +56,7 @@ namespace stepik.Migrations
                             UserId = 1,
                             CourseId = 1,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate1.pdf"
                         },
                         new
@@ -64,7 +64,7 @@ namespace stepik.Migrations
                             UserId = 1,
                             CourseId = 2,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 1, 12, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate2.pdf"
                         },
                         new
@@ -72,7 +72,7 @@ namespace stepik.Migrations
                             UserId = 1,
                             CourseId = 3,
                             Grade = 70,
-                            IssueDate = new DateTime(2021, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 1, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate3.pdf"
                         },
                         new
@@ -80,7 +80,7 @@ namespace stepik.Migrations
                             UserId = 2,
                             CourseId = 4,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 1, 26, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate4.pdf"
                         },
                         new
@@ -88,7 +88,7 @@ namespace stepik.Migrations
                             UserId = 2,
                             CourseId = 5,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate5.pdf"
                         },
                         new
@@ -96,7 +96,7 @@ namespace stepik.Migrations
                             UserId = 3,
                             CourseId = 6,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 2, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate6.pdf"
                         },
                         new
@@ -104,7 +104,7 @@ namespace stepik.Migrations
                             UserId = 3,
                             CourseId = 7,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 2, 16, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate7.pdf"
                         },
                         new
@@ -112,7 +112,7 @@ namespace stepik.Migrations
                             UserId = 4,
                             CourseId = 8,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 2, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 2, 23, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate8.pdf"
                         },
                         new
@@ -120,7 +120,7 @@ namespace stepik.Migrations
                             UserId = 4,
                             CourseId = 9,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 3, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate9.pdf"
                         },
                         new
@@ -128,7 +128,7 @@ namespace stepik.Migrations
                             UserId = 5,
                             CourseId = 10,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 3, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 3, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate10.pdf"
                         },
                         new
@@ -136,7 +136,7 @@ namespace stepik.Migrations
                             UserId = 5,
                             CourseId = 11,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 3, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 3, 16, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate11.pdf"
                         },
                         new
@@ -144,7 +144,7 @@ namespace stepik.Migrations
                             UserId = 5,
                             CourseId = 12,
                             Grade = 70,
-                            IssueDate = new DateTime(2021, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 3, 23, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate12.pdf"
                         },
                         new
@@ -152,7 +152,7 @@ namespace stepik.Migrations
                             UserId = 6,
                             CourseId = 13,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 3, 30, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate13.pdf"
                         },
                         new
@@ -160,7 +160,7 @@ namespace stepik.Migrations
                             UserId = 6,
                             CourseId = 14,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 4, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate14.pdf"
                         },
                         new
@@ -168,7 +168,7 @@ namespace stepik.Migrations
                             UserId = 7,
                             CourseId = 15,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 4, 13, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate15.pdf"
                         },
                         new
@@ -176,7 +176,7 @@ namespace stepik.Migrations
                             UserId = 7,
                             CourseId = 16,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 4, 20, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate16.pdf"
                         },
                         new
@@ -184,7 +184,7 @@ namespace stepik.Migrations
                             UserId = 7,
                             CourseId = 17,
                             Grade = 70,
-                            IssueDate = new DateTime(2021, 4, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 4, 27, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate17.pdf"
                         },
                         new
@@ -192,7 +192,7 @@ namespace stepik.Migrations
                             UserId = 8,
                             CourseId = 18,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 5, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate18.pdf"
                         },
                         new
@@ -200,7 +200,7 @@ namespace stepik.Migrations
                             UserId = 8,
                             CourseId = 19,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 5, 11, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate19.pdf"
                         },
                         new
@@ -208,7 +208,7 @@ namespace stepik.Migrations
                             UserId = 9,
                             CourseId = 20,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate20.pdf"
                         },
                         new
@@ -216,7 +216,7 @@ namespace stepik.Migrations
                             UserId = 9,
                             CourseId = 21,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 5, 25, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate21.pdf"
                         },
                         new
@@ -224,7 +224,7 @@ namespace stepik.Migrations
                             UserId = 9,
                             CourseId = 22,
                             Grade = 70,
-                            IssueDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate22.pdf"
                         },
                         new
@@ -232,7 +232,7 @@ namespace stepik.Migrations
                             UserId = 10,
                             CourseId = 23,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate23.pdf"
                         },
                         new
@@ -240,7 +240,7 @@ namespace stepik.Migrations
                             UserId = 10,
                             CourseId = 24,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate24.pdf"
                         },
                         new
@@ -248,7 +248,7 @@ namespace stepik.Migrations
                             UserId = 11,
                             CourseId = 25,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate25.pdf"
                         },
                         new
@@ -256,7 +256,7 @@ namespace stepik.Migrations
                             UserId = 11,
                             CourseId = 26,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 6, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 6, 29, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate26.pdf"
                         },
                         new
@@ -264,7 +264,7 @@ namespace stepik.Migrations
                             UserId = 11,
                             CourseId = 27,
                             Grade = 70,
-                            IssueDate = new DateTime(2021, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 7, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate27.pdf"
                         },
                         new
@@ -272,7 +272,7 @@ namespace stepik.Migrations
                             UserId = 12,
                             CourseId = 28,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 7, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 7, 13, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate28.pdf"
                         },
                         new
@@ -280,7 +280,7 @@ namespace stepik.Migrations
                             UserId = 12,
                             CourseId = 29,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate29.pdf"
                         },
                         new
@@ -288,7 +288,7 @@ namespace stepik.Migrations
                             UserId = 13,
                             CourseId = 30,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 7, 27, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate30.pdf"
                         },
                         new
@@ -296,7 +296,7 @@ namespace stepik.Migrations
                             UserId = 13,
                             CourseId = 1,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 8, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 8, 3, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate31.pdf"
                         },
                         new
@@ -304,7 +304,7 @@ namespace stepik.Migrations
                             UserId = 14,
                             CourseId = 2,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate32.pdf"
                         },
                         new
@@ -312,7 +312,7 @@ namespace stepik.Migrations
                             UserId = 14,
                             CourseId = 3,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 8, 17, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate33.pdf"
                         },
                         new
@@ -320,7 +320,7 @@ namespace stepik.Migrations
                             UserId = 15,
                             CourseId = 4,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate34.pdf"
                         },
                         new
@@ -328,7 +328,7 @@ namespace stepik.Migrations
                             UserId = 15,
                             CourseId = 5,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 8, 31, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate35.pdf"
                         },
                         new
@@ -336,7 +336,7 @@ namespace stepik.Migrations
                             UserId = 16,
                             CourseId = 6,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 9, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate36.pdf"
                         },
                         new
@@ -344,7 +344,7 @@ namespace stepik.Migrations
                             UserId = 16,
                             CourseId = 7,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 9, 14, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate37.pdf"
                         },
                         new
@@ -352,7 +352,7 @@ namespace stepik.Migrations
                             UserId = 17,
                             CourseId = 8,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 9, 21, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate38.pdf"
                         },
                         new
@@ -360,7 +360,7 @@ namespace stepik.Migrations
                             UserId = 17,
                             CourseId = 9,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 9, 28, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate39.pdf"
                         },
                         new
@@ -368,7 +368,7 @@ namespace stepik.Migrations
                             UserId = 18,
                             CourseId = 10,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 10, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate40.pdf"
                         },
                         new
@@ -376,7 +376,7 @@ namespace stepik.Migrations
                             UserId = 18,
                             CourseId = 11,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 10, 12, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate41.pdf"
                         },
                         new
@@ -384,7 +384,7 @@ namespace stepik.Migrations
                             UserId = 19,
                             CourseId = 12,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate42.pdf"
                         },
                         new
@@ -392,7 +392,7 @@ namespace stepik.Migrations
                             UserId = 19,
                             CourseId = 13,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 10, 26, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate43.pdf"
                         },
                         new
@@ -400,7 +400,7 @@ namespace stepik.Migrations
                             UserId = 20,
                             CourseId = 14,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 11, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate44.pdf"
                         },
                         new
@@ -408,7 +408,7 @@ namespace stepik.Migrations
                             UserId = 20,
                             CourseId = 15,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 11, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate45.pdf"
                         },
                         new
@@ -416,7 +416,7 @@ namespace stepik.Migrations
                             UserId = 21,
                             CourseId = 16,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate46.pdf"
                         },
                         new
@@ -424,7 +424,7 @@ namespace stepik.Migrations
                             UserId = 21,
                             CourseId = 17,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 11, 23, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate47.pdf"
                         },
                         new
@@ -432,7 +432,7 @@ namespace stepik.Migrations
                             UserId = 22,
                             CourseId = 18,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 11, 30, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate48.pdf"
                         },
                         new
@@ -440,7 +440,7 @@ namespace stepik.Migrations
                             UserId = 22,
                             CourseId = 19,
                             Grade = 80,
-                            IssueDate = new DateTime(2021, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 12, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate49.pdf"
                         },
                         new
@@ -448,7 +448,7 @@ namespace stepik.Migrations
                             UserId = 23,
                             CourseId = 20,
                             Grade = 95,
-                            IssueDate = new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate50.pdf"
                         },
                         new
@@ -456,7 +456,7 @@ namespace stepik.Migrations
                             UserId = 23,
                             CourseId = 21,
                             Grade = 85,
-                            IssueDate = new DateTime(2021, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 12, 21, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate51.pdf"
                         },
                         new
@@ -464,7 +464,7 @@ namespace stepik.Migrations
                             UserId = 24,
                             CourseId = 22,
                             Grade = 90,
-                            IssueDate = new DateTime(2021, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2021, 12, 28, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate52.pdf"
                         },
                         new
@@ -472,7 +472,7 @@ namespace stepik.Migrations
                             UserId = 24,
                             CourseId = 23,
                             Grade = 80,
-                            IssueDate = new DateTime(2022, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate53.pdf"
                         },
                         new
@@ -480,7 +480,7 @@ namespace stepik.Migrations
                             UserId = 25,
                             CourseId = 24,
                             Grade = 95,
-                            IssueDate = new DateTime(2022, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 1, 11, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate54.pdf"
                         },
                         new
@@ -488,7 +488,7 @@ namespace stepik.Migrations
                             UserId = 25,
                             CourseId = 25,
                             Grade = 85,
-                            IssueDate = new DateTime(2022, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate55.pdf"
                         },
                         new
@@ -496,7 +496,7 @@ namespace stepik.Migrations
                             UserId = 26,
                             CourseId = 26,
                             Grade = 90,
-                            IssueDate = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate56.pdf"
                         },
                         new
@@ -504,7 +504,7 @@ namespace stepik.Migrations
                             UserId = 26,
                             CourseId = 27,
                             Grade = 80,
-                            IssueDate = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate57.pdf"
                         },
                         new
@@ -512,7 +512,7 @@ namespace stepik.Migrations
                             UserId = 27,
                             CourseId = 28,
                             Grade = 95,
-                            IssueDate = new DateTime(2022, 2, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate58.pdf"
                         },
                         new
@@ -520,7 +520,7 @@ namespace stepik.Migrations
                             UserId = 27,
                             CourseId = 29,
                             Grade = 85,
-                            IssueDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate59.pdf"
                         },
                         new
@@ -528,7 +528,7 @@ namespace stepik.Migrations
                             UserId = 28,
                             CourseId = 30,
                             Grade = 90,
-                            IssueDate = new DateTime(2022, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 2, 22, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate60.pdf"
                         },
                         new
@@ -536,7 +536,7 @@ namespace stepik.Migrations
                             UserId = 28,
                             CourseId = 1,
                             Grade = 80,
-                            IssueDate = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate61.pdf"
                         },
                         new
@@ -544,7 +544,7 @@ namespace stepik.Migrations
                             UserId = 29,
                             CourseId = 2,
                             Grade = 95,
-                            IssueDate = new DateTime(2022, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 3, 8, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate62.pdf"
                         },
                         new
@@ -552,7 +552,7 @@ namespace stepik.Migrations
                             UserId = 29,
                             CourseId = 3,
                             Grade = 85,
-                            IssueDate = new DateTime(2022, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 3, 15, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate63.pdf"
                         },
                         new
@@ -560,7 +560,7 @@ namespace stepik.Migrations
                             UserId = 30,
                             CourseId = 4,
                             Grade = 90,
-                            IssueDate = new DateTime(2022, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 3, 22, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate64.pdf"
                         },
                         new
@@ -568,7 +568,7 @@ namespace stepik.Migrations
                             UserId = 30,
                             CourseId = 5,
                             Grade = 80,
-                            IssueDate = new DateTime(2022, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IssueDate = new DateTime(2022, 3, 29, 0, 0, 0, 0, DateTimeKind.Utc),
                             Url = "https://example.com/certificate65.pdf"
                         });
                 });
@@ -576,29 +576,29 @@ namespace stepik.Migrations
             modelBuilder.Entity("CertificateSetting", b =>
                 {
                     b.Property<int>("CourseId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("course_id");
 
                     b.Property<int>("ExcellentThreshold")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("excellent_threshold");
 
                     b.Property<bool>("IsCertificateAutoIssued")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_certificate_auto_issued");
 
                     b.Property<string>("LogoUrl")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("logo_url");
 
                     b.Property<int>("RegularThreshold")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("regular_threshold");
 
                     b.Property<string>("SignatureUrl")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("signature_url");
 
                     b.HasKey("CourseId");
@@ -729,38 +729,38 @@ namespace stepik.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AbuseCount")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("abuse_count");
 
                     b.Property<int>("EpicCount")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("epic_count");
 
                     b.Property<int?>("ReplyCommentId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("reply_comment_id");
 
                     b.Property<int?>("StepId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("step_id");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("text");
 
                     b.Property<DateTime>("Time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("time");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id");
@@ -781,7 +781,7 @@ namespace stepik.Migrations
                             EpicCount = 5,
                             StepId = 1,
                             Text = "Great step!",
-                            Time = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 1
                         },
                         new
@@ -791,7 +791,7 @@ namespace stepik.Migrations
                             EpicCount = 3,
                             StepId = 1,
                             Text = "I agree, very helpful.",
-                            Time = new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 2
                         },
                         new
@@ -802,7 +802,7 @@ namespace stepik.Migrations
                             ReplyCommentId = 1,
                             StepId = 1,
                             Text = "Thanks for the feedback!",
-                            Time = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 3
                         },
                         new
@@ -812,7 +812,7 @@ namespace stepik.Migrations
                             EpicCount = 1,
                             StepId = 2,
                             Text = "This step is a bit confusing.",
-                            Time = new DateTime(2023, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 4
                         },
                         new
@@ -823,7 +823,7 @@ namespace stepik.Migrations
                             ReplyCommentId = 4,
                             StepId = 2,
                             Text = "I can help explain it if you need.",
-                            Time = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 5
                         },
                         new
@@ -833,7 +833,7 @@ namespace stepik.Migrations
                             EpicCount = 6,
                             StepId = 3,
                             Text = "Excellent content!",
-                            Time = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 6
                         },
                         new
@@ -844,7 +844,7 @@ namespace stepik.Migrations
                             ReplyCommentId = 6,
                             StepId = 3,
                             Text = "Glad you found it useful!",
-                            Time = new DateTime(2023, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 7
                         },
                         new
@@ -854,7 +854,7 @@ namespace stepik.Migrations
                             EpicCount = 2,
                             StepId = 4,
                             Text = "Could use more examples.",
-                            Time = new DateTime(2023, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 8, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 8
                         },
                         new
@@ -865,7 +865,7 @@ namespace stepik.Migrations
                             ReplyCommentId = 8,
                             StepId = 4,
                             Text = "I will add more examples in the next update.",
-                            Time = new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 9
                         },
                         new
@@ -875,7 +875,7 @@ namespace stepik.Migrations
                             EpicCount = 7,
                             StepId = 5,
                             Text = "This step is perfect!",
-                            Time = new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 10
                         },
                         new
@@ -884,7 +884,7 @@ namespace stepik.Migrations
                             AbuseCount = 0,
                             EpicCount = 1,
                             Text = "thank you",
-                            Time = new DateTime(2023, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 11, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 11
                         },
                         new
@@ -893,7 +893,7 @@ namespace stepik.Migrations
                             AbuseCount = 0,
                             EpicCount = 0,
                             Text = "thank you very much!",
-                            Time = new DateTime(2023, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Time = new DateTime(2023, 10, 15, 0, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 12
                         });
                 });
@@ -902,33 +902,33 @@ namespace stepik.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date");
 
                     b.Property<string>("Photo")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("photo");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)")
+                        .HasColumnType("numeric")
                         .HasColumnName("price");
 
                     b.Property<string>("Summary")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("summary");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("title");
 
                     b.HasKey("Id");
@@ -939,7 +939,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course4.jpg",
                             Price = 6000m,
                             Summary = "Курс для начинающих веб-разработчиков",
@@ -948,7 +948,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course5.jpg",
                             Price = 4000m,
                             Summary = "Курс по верстке сайтов",
@@ -957,7 +957,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course6.jpg",
                             Price = 7000m,
                             Summary = "Курс по созданию динамических сайтов",
@@ -966,7 +966,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course7.jpg",
                             Price = 9000m,
                             Summary = "Курс по разработке мобильных приложений",
@@ -975,7 +975,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course8.jpg",
                             Price = 10000m,
                             Summary = "Курс по разработке мобильных приложений",
@@ -984,7 +984,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course9.jpg",
                             Price = 5000m,
                             Summary = "Курс по работе с базами данных",
@@ -993,7 +993,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course10.jpg",
                             Price = 3000m,
                             Summary = "Курс по работе с системами контроля версий",
@@ -1002,7 +1002,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course11.jpg",
                             Price = 4000m,
                             Summary = "Курс по работе с операционной системой Linux",
@@ -1011,7 +1011,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course26.jpg",
                             Price = 5000m,
                             Summary = "Курс по основам сетевых технологий и безопасности",
@@ -1020,7 +1020,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2022, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 11, 11, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course27.jpg",
                             Price = 1000m,
                             Summary = "Курс поразработке и сопровождению программного обеспечения",
@@ -1029,7 +1029,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course14.jpg",
                             Price = 6000m,
                             Summary = "Курс по тестированию программного обеспечения",
@@ -1038,7 +1038,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2021, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 12, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course15.jpg",
                             Price = 9000m,
                             Summary = "Курс по управлению проектами",
@@ -1047,7 +1047,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course16.jpg",
                             Price = 10000m,
                             Summary = "Курс по анализу данных",
@@ -1056,7 +1056,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 14,
-                            CreatedDate = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course17.jpg",
                             Price = 12000m,
                             Summary = "Курс по машинному обучению",
@@ -1065,7 +1065,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 15,
-                            CreatedDate = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course18.jpg",
                             Price = 15000m,
                             Summary = "Курс по искусственному интеллекту",
@@ -1074,7 +1074,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 16,
-                            CreatedDate = new DateTime(2022, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 4, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course19.jpg",
                             Price = 7000m,
                             Summary = "Курс по компьютерной графике",
@@ -1083,7 +1083,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 17,
-                            CreatedDate = new DateTime(2022, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 5, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course20.jpg",
                             Price = 5000m,
                             Summary = "Курс по дизайну сайтов",
@@ -1092,7 +1092,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 18,
-                            CreatedDate = new DateTime(2022, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 6, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course21.jpg",
                             Price = 8000m,
                             Summary = "Курс по маркетингу",
@@ -1101,7 +1101,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 19,
-                            CreatedDate = new DateTime(2022, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course22.jpg",
                             Price = 11000m,
                             Summary = "Курс по управлению продуктом",
@@ -1110,7 +1110,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 20,
-                            CreatedDate = new DateTime(2022, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 8, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course23.jpg",
                             Price = 14000m,
                             Summary = "Курс по системному администрированию",
@@ -1119,7 +1119,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 21,
-                            CreatedDate = new DateTime(2022, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course24.jpg",
                             Price = 13000m,
                             Summary = "Курс по сетевому администрированию",
@@ -1128,7 +1128,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 22,
-                            CreatedDate = new DateTime(2022, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 10, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course25.jpg",
                             Price = 16000m,
                             Summary = "Курс по разработке игр",
@@ -1137,7 +1137,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 23,
-                            CreatedDate = new DateTime(2022, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course26.jpg",
                             Price = 18000m,
                             Summary = "Курс по виртуальной реальности",
@@ -1146,7 +1146,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 24,
-                            CreatedDate = new DateTime(2022, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 12, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course27.jpg",
                             Price = 20000m,
                             Summary = "Курс по дополненной реальности",
@@ -1155,7 +1155,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 25,
-                            CreatedDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course28.jpg",
                             Price = 22000m,
                             Summary = "Курс по блокчейн-технологиям",
@@ -1164,7 +1164,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 26,
-                            CreatedDate = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course29.jpg",
                             Price = 25000m,
                             Summary = "Курс по криптовалютам",
@@ -1173,7 +1173,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 27,
-                            CreatedDate = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course30.jpg",
                             Price = 28000m,
                             Summary = "Курс по искусственным нейронным сетям",
@@ -1182,7 +1182,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 28,
-                            CreatedDate = new DateTime(2021, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course10.jpg",
                             Price = 4000m,
                             Summary = "Курс по работе с системами контроля версий",
@@ -1191,7 +1191,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 29,
-                            CreatedDate = new DateTime(2022, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2022, 8, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course11.jpg",
                             Price = 6000m,
                             Summary = "Курс по работе с операционной системой Linux",
@@ -1200,7 +1200,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 30,
-                            CreatedDate = new DateTime(2021, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course12.jpg",
                             Price = 8000m,
                             Summary = "Курс по основам сетевых технологий и безопасности",
@@ -1209,7 +1209,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 31,
-                            CreatedDate = new DateTime(2021, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 10, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course13.jpg",
                             Price = 11000m,
                             Summary = "Курс по разработке и сопровождению программного обеспечения",
@@ -1218,7 +1218,7 @@ namespace stepik.Migrations
                         new
                         {
                             Id = 32,
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 11, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             Photo = "https://example.com/course14.jpg",
                             Price = 8000m,
                             Summary = "Курс по тестированию программного обеспечения",
@@ -1229,11 +1229,11 @@ namespace stepik.Migrations
             modelBuilder.Entity("CourseAuthor", b =>
                 {
                     b.Property<int>("CourseId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("course_id");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
                     b.HasKey("CourseId", "UserId");
@@ -1398,36 +1398,36 @@ namespace stepik.Migrations
             modelBuilder.Entity("CourseReview", b =>
                 {
                     b.Property<int>("CourseId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("course_id");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
                     b.Property<int>("AbuseCount")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("abuse_count");
 
                     b.Property<int?>("CommentId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("comment_id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date");
 
                     b.Property<int>("EpicCount")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("epic_count");
 
                     b.Property<int>("Score")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("score");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("text");
 
                     b.HasKey("CourseId", "UserId");
@@ -1446,7 +1446,7 @@ namespace stepik.Migrations
                             UserId = 1,
                             AbuseCount = 0,
                             CommentId = 11,
-                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 10,
                             Score = 5,
                             Text = "Great course! Highly recommend."
@@ -1457,7 +1457,7 @@ namespace stepik.Migrations
                             UserId = 2,
                             AbuseCount = 0,
                             CommentId = 12,
-                            CreatedDate = new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 8,
                             Score = 4,
                             Text = "Very informative and well-structured."
@@ -1467,7 +1467,7 @@ namespace stepik.Migrations
                             CourseId = 1,
                             UserId = 3,
                             AbuseCount = 1,
-                            CreatedDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 3, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 5,
                             Score = 3,
                             Text = "Could use more practical examples."
@@ -1477,7 +1477,7 @@ namespace stepik.Migrations
                             CourseId = 2,
                             UserId = 4,
                             AbuseCount = 1,
-                            CreatedDate = new DateTime(2023, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 7,
                             Score = 4,
                             Text = "Excellent content, but some steps are confusing."
@@ -1487,7 +1487,7 @@ namespace stepik.Migrations
                             CourseId = 2,
                             UserId = 5,
                             AbuseCount = 0,
-                            CreatedDate = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 9,
                             Score = 5,
                             Text = "The instructor is very knowledgeable."
@@ -1497,7 +1497,7 @@ namespace stepik.Migrations
                             CourseId = 3,
                             UserId = 6,
                             AbuseCount = 0,
-                            CreatedDate = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 12,
                             Score = 5,
                             Text = "This course is perfect for beginners."
@@ -1507,7 +1507,7 @@ namespace stepik.Migrations
                             CourseId = 3,
                             UserId = 7,
                             AbuseCount = 0,
-                            CreatedDate = new DateTime(2023, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 10,
                             Score = 4,
                             Text = "I learned a lot from this course."
@@ -1517,7 +1517,7 @@ namespace stepik.Migrations
                             CourseId = 4,
                             UserId = 8,
                             AbuseCount = 0,
-                            CreatedDate = new DateTime(2023, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 8, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 11,
                             Score = 5,
                             Text = "The course is well-organized and easy to follow."
@@ -1527,7 +1527,7 @@ namespace stepik.Migrations
                             CourseId = 4,
                             UserId = 9,
                             AbuseCount = 1,
-                            CreatedDate = new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 6,
                             Score = 3,
                             Text = "Some topics could be explained in more detail."
@@ -1537,7 +1537,7 @@ namespace stepik.Migrations
                             CourseId = 5,
                             UserId = 10,
                             AbuseCount = 0,
-                            CreatedDate = new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             EpicCount = 13,
                             Score = 5,
                             Text = "This course exceeded my expectations."
@@ -1548,22 +1548,22 @@ namespace stepik.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AbuseCount")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("abuse_count");
 
                     b.Property<int>("EpicCount")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("epic_count");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("title");
 
                     b.HasKey("Id");
@@ -1801,18 +1801,18 @@ namespace stepik.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("create_date");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("text");
 
                     b.HasKey("Id");
@@ -1823,19 +1823,19 @@ namespace stepik.Migrations
             modelBuilder.Entity("Progress", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
                     b.Property<int>("StepId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("step_id");
 
                     b.Property<bool>("IsPassed")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_passed");
 
                     b.Property<int>("Score")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("score");
 
                     b.HasKey("UserId", "StepId");
@@ -2747,19 +2747,19 @@ namespace stepik.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("LogoUrl")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("logo_url");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("name");
 
                     b.HasKey("Id");
@@ -2839,31 +2839,31 @@ namespace stepik.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("content");
 
                     b.Property<int>("Cost")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("cost");
 
                     b.Property<int>("LessonId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("lesson_id");
 
                     b.Property<int>("Position")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("position");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("title");
 
                     b.HasKey("Id");
@@ -3167,18 +3167,18 @@ namespace stepik.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CourseId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("course_id");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("title");
 
                     b.HasKey("Id");
@@ -3577,11 +3577,11 @@ namespace stepik.Migrations
             modelBuilder.Entity("UnitLesson", b =>
                 {
                     b.Property<int>("UnitId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("unit_id");
 
                     b.Property<int>("LessonId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("lesson_id");
 
                     b.HasKey("UnitId", "LessonId");
@@ -4237,62 +4237,62 @@ namespace stepik.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AboutMe")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("about_me");
 
                     b.Property<string>("Avatar")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("avatar");
 
                     b.Property<int>("DaysWithoutBreak")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("days_without_break");
 
                     b.Property<int>("DaysWithoutBreakMax")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("days_without_break_max");
 
                     b.Property<string>("Details")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("details");
 
                     b.Property<int>("FollowersCount")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("followers_count");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("full_name");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_active");
 
                     b.Property<DateTime>("JoinDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("join_date");
 
                     b.Property<int>("Knowledge")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("knowledge");
 
                     b.Property<int>("Reputation")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("reputation");
 
                     b.Property<int>("SolvedTasks")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("solved_tasks");
 
                     b.HasKey("Id");
@@ -4310,7 +4310,7 @@ namespace stepik.Migrations
                             FollowersCount = 30,
                             FullName = "Петр Васильев",
                             IsActive = true,
-                            JoinDate = new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 150,
                             Reputation = 75,
                             SolvedTasks = 45
@@ -4325,7 +4325,7 @@ namespace stepik.Migrations
                             FollowersCount = 10,
                             FullName = "Елена Кузнецова",
                             IsActive = true,
-                            JoinDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 75,
                             Reputation = 25,
                             SolvedTasks = 15
@@ -4340,7 +4340,7 @@ namespace stepik.Migrations
                             FollowersCount = 60,
                             FullName = "Алексей Соколов",
                             IsActive = false,
-                            JoinDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 250,
                             Reputation = 125,
                             SolvedTasks = 80
@@ -4355,7 +4355,7 @@ namespace stepik.Migrations
                             FollowersCount = 25,
                             FullName = "Екатерина Борисова",
                             IsActive = true,
-                            JoinDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 125,
                             Reputation = 60,
                             SolvedTasks = 35
@@ -4370,7 +4370,7 @@ namespace stepik.Migrations
                             FollowersCount = 40,
                             FullName = "Максим Александров",
                             IsActive = true,
-                            JoinDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 200,
                             Reputation = 100,
                             SolvedTasks = 50
@@ -4385,7 +4385,7 @@ namespace stepik.Migrations
                             FollowersCount = 75,
                             FullName = "Наталья Иванова",
                             IsActive = false,
-                            JoinDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 300,
                             Reputation = 150,
                             SolvedTasks = 95
@@ -4400,7 +4400,7 @@ namespace stepik.Migrations
                             FollowersCount = 50,
                             FullName = "Андрей Петров",
                             IsActive = true,
-                            JoinDate = new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 225,
                             Reputation = 110,
                             SolvedTasks = 65
@@ -4415,7 +4415,7 @@ namespace stepik.Migrations
                             FollowersCount = 35,
                             FullName = "Елизавета Смирнова",
                             IsActive = true,
-                            JoinDate = new DateTime(2021, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 175,
                             Reputation = 85,
                             SolvedTasks = 40
@@ -4430,7 +4430,7 @@ namespace stepik.Migrations
                             FollowersCount = 65,
                             FullName = "Артем Кузнецов",
                             IsActive = false,
-                            JoinDate = new DateTime(2021, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 10, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 275,
                             Reputation = 135,
                             SolvedTasks = 100
@@ -4445,7 +4445,7 @@ namespace stepik.Migrations
                             FollowersCount = 20,
                             FullName = "Анна Соколова",
                             IsActive = true,
-                            JoinDate = new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 100,
                             Reputation = 50,
                             SolvedTasks = 30
@@ -4460,7 +4460,7 @@ namespace stepik.Migrations
                             FollowersCount = 25,
                             FullName = "Сергей Борисов",
                             IsActive = true,
-                            JoinDate = new DateTime(2021, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2021, 12, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 125,
                             Reputation = 60,
                             SolvedTasks = 35
@@ -4475,7 +4475,7 @@ namespace stepik.Migrations
                             FollowersCount = 30,
                             FullName = "Мария Александрова",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 150,
                             Reputation = 75,
                             SolvedTasks = 45
@@ -4490,7 +4490,7 @@ namespace stepik.Migrations
                             FollowersCount = 60,
                             FullName = "Даниил Иванов",
                             IsActive = false,
-                            JoinDate = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 250,
                             Reputation = 125,
                             SolvedTasks = 80
@@ -4505,7 +4505,7 @@ namespace stepik.Migrations
                             FollowersCount = 50,
                             FullName = "Виктория Петрова",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 225,
                             Reputation = 110,
                             SolvedTasks = 50
@@ -4520,7 +4520,7 @@ namespace stepik.Migrations
                             FollowersCount = 35,
                             FullName = "Николай Кузнецов",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 4, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 175,
                             Reputation = 85,
                             SolvedTasks = 35
@@ -4535,7 +4535,7 @@ namespace stepik.Migrations
                             FollowersCount = 75,
                             FullName = "Ольга Соколова",
                             IsActive = false,
-                            JoinDate = new DateTime(2022, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 5, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 300,
                             Reputation = 150,
                             SolvedTasks = 95
@@ -4550,7 +4550,7 @@ namespace stepik.Migrations
                             FollowersCount = 65,
                             FullName = "Михаил Борисов",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 6, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 275,
                             Reputation = 135,
                             SolvedTasks = 65
@@ -4565,7 +4565,7 @@ namespace stepik.Migrations
                             FollowersCount = 40,
                             FullName = "Александр Александров",
                             IsActive = false,
-                            JoinDate = new DateTime(2022, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 200,
                             Reputation = 100,
                             SolvedTasks = 50
@@ -4580,7 +4580,7 @@ namespace stepik.Migrations
                             FollowersCount = 20,
                             FullName = "Анна Кузнецова",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 8, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 100,
                             Reputation = 50,
                             SolvedTasks = 45
@@ -4595,7 +4595,7 @@ namespace stepik.Migrations
                             FollowersCount = 25,
                             FullName = "Игорь Петров",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 125,
                             Reputation = 60,
                             SolvedTasks = 35
@@ -4610,7 +4610,7 @@ namespace stepik.Migrations
                             FollowersCount = 60,
                             FullName = "Елена Борисова",
                             IsActive = false,
-                            JoinDate = new DateTime(2022, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 10, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 250,
                             Reputation = 125,
                             SolvedTasks = 80
@@ -4625,7 +4625,7 @@ namespace stepik.Migrations
                             FollowersCount = 50,
                             FullName = "Александр Смирнов",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 225,
                             Reputation = 110,
                             SolvedTasks = 50
@@ -4640,7 +4640,7 @@ namespace stepik.Migrations
                             FollowersCount = 35,
                             FullName = "Ирина Соколова",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 12, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 175,
                             Reputation = 85,
                             SolvedTasks = 35
@@ -4655,7 +4655,7 @@ namespace stepik.Migrations
                             FollowersCount = 75,
                             FullName = "Алексей Иванов",
                             IsActive = false,
-                            JoinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 300,
                             Reputation = 150,
                             SolvedTasks = 95
@@ -4670,7 +4670,7 @@ namespace stepik.Migrations
                             FollowersCount = 65,
                             FullName = "Владислав Петров",
                             IsActive = true,
-                            JoinDate = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 275,
                             Reputation = 135,
                             SolvedTasks = 65
@@ -4685,7 +4685,7 @@ namespace stepik.Migrations
                             FollowersCount = 44,
                             FullName = "Екатерина Кузнецова",
                             IsActive = false,
-                            JoinDate = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 220,
                             Reputation = 160,
                             SolvedTasks = 50
@@ -4700,7 +4700,7 @@ namespace stepik.Migrations
                             FollowersCount = 20,
                             FullName = "Максим Борисов",
                             IsActive = false,
-                            JoinDate = new DateTime(2023, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2023, 4, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 100,
                             Reputation = 50,
                             SolvedTasks = 45
@@ -4715,7 +4715,7 @@ namespace stepik.Migrations
                             FollowersCount = 60,
                             FullName = "Даниил Иванов",
                             IsActive = false,
-                            JoinDate = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 250,
                             Reputation = 125,
                             SolvedTasks = 80
@@ -4730,7 +4730,7 @@ namespace stepik.Migrations
                             FollowersCount = 65,
                             FullName = "Владислав Петров",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 2, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 2, 8, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 275,
                             Reputation = 135,
                             SolvedTasks = 65
@@ -4745,7 +4745,7 @@ namespace stepik.Migrations
                             FollowersCount = 20,
                             FullName = "Екатерина Кузнецова",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 2, 15, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 100,
                             Reputation = 50,
                             SolvedTasks = 45
@@ -4760,7 +4760,7 @@ namespace stepik.Migrations
                             FollowersCount = 75,
                             FullName = "Максим Борисов",
                             IsActive = false,
-                            JoinDate = new DateTime(2022, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 2, 22, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 300,
                             Reputation = 150,
                             SolvedTasks = 95
@@ -4775,7 +4775,7 @@ namespace stepik.Migrations
                             FollowersCount = 40,
                             FullName = "Александр Александров",
                             IsActive = true,
-                            JoinDate = new DateTime(2022, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JoinDate = new DateTime(2022, 6, 28, 0, 0, 0, 0, DateTimeKind.Utc),
                             Knowledge = 521,
                             Reputation = 100,
                             SolvedTasks = 50
@@ -4785,27 +4785,27 @@ namespace stepik.Migrations
             modelBuilder.Entity("UserCourse", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
                     b.Property<int>("CourseId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("course_id");
 
                     b.Property<bool>("IsArchived")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_archived");
 
                     b.Property<bool>("IsFavorite")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_favorite");
 
                     b.Property<bool>("IsPinned")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_pinned");
 
                     b.Property<DateTime>("LastViewed")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("last_viewed");
 
                     b.HasKey("UserId", "CourseId");
@@ -4822,7 +4822,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4831,7 +4831,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4840,7 +4840,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 1, 14, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4849,7 +4849,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 1, 21, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4858,7 +4858,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 1, 28, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4867,7 +4867,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 2, 4, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4876,7 +4876,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 2, 11, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4885,7 +4885,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 2, 18, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4894,7 +4894,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 2, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 2, 25, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4903,7 +4903,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4912,7 +4912,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 3, 11, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4921,7 +4921,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 3, 18, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4930,7 +4930,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 3, 25, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4939,7 +4939,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4948,7 +4948,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 4, 8, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4957,7 +4957,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 4, 15, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4966,7 +4966,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4975,7 +4975,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4984,7 +4984,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 5, 6, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -4993,7 +4993,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5002,7 +5002,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 5, 20, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5011,7 +5011,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 5, 27, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 5, 27, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5020,7 +5020,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 6, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 6, 3, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5029,7 +5029,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 6, 10, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5038,7 +5038,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5047,7 +5047,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5056,7 +5056,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5065,7 +5065,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5074,7 +5074,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5083,7 +5083,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 7, 22, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5092,7 +5092,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 7, 29, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5101,7 +5101,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 8, 5, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5110,7 +5110,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 8, 12, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5119,7 +5119,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 8, 19, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5128,7 +5128,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 8, 26, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5137,7 +5137,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 9, 2, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5146,7 +5146,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5155,7 +5155,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 9, 16, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5164,7 +5164,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 9, 23, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5173,7 +5173,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 9, 30, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5182,7 +5182,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 10, 7, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5191,7 +5191,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5200,7 +5200,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5209,7 +5209,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 10, 28, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5218,7 +5218,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5227,7 +5227,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 11, 11, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5236,7 +5236,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5245,7 +5245,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 11, 25, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5254,7 +5254,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 12, 2, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5263,7 +5263,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 12, 9, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5272,7 +5272,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 12, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 12, 16, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5281,7 +5281,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2021, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 12, 23, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5290,7 +5290,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2021, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2021, 12, 30, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5299,7 +5299,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2022, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5308,7 +5308,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5317,7 +5317,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5326,7 +5326,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2022, 1, 27, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 1, 27, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5335,7 +5335,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 2, 3, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5344,7 +5344,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2022, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 2, 10, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5353,7 +5353,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2022, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 2, 17, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5362,7 +5362,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = false,
                             IsPinned = true,
-                            LastViewed = new DateTime(2022, 2, 24, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 2, 24, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5371,7 +5371,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = false,
-                            LastViewed = new DateTime(2022, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 3, 3, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5380,7 +5380,7 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 3, 10, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5389,7 +5389,7 @@ namespace stepik.Migrations
                             IsArchived = false,
                             IsFavorite = true,
                             IsPinned = true,
-                            LastViewed = new DateTime(2022, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 3, 17, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
@@ -5398,23 +5398,23 @@ namespace stepik.Migrations
                             IsArchived = true,
                             IsFavorite = false,
                             IsPinned = false,
-                            LastViewed = new DateTime(2022, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastViewed = new DateTime(2022, 3, 24, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
             modelBuilder.Entity("UserSocialProvider", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
 
                     b.Property<int>("SocialProviderId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("social_provider_id");
 
                     b.Property<string>("ConnectUrl")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("connect_url");
 
                     b.HasKey("UserId", "SocialProviderId");
