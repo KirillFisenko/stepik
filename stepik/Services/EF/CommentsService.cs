@@ -17,8 +17,7 @@ public class CommentsService : ICommentsService
             .AsNoTracking()
             .Where(c =>
                 c.ReplyCommentId == null &&
-                dbContext.UnitLessons
-                    .Any(ul => ul.LessonId == c.StepId && ul.Unit.CourseId == id)
+                c.Step.Lesson.UnitLessons.Any(ul => ul.Unit.CourseId == id)
             )
             .OrderByDescending(c => c.Time)
             .ToList();
