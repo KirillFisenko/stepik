@@ -19,8 +19,7 @@ public class CommentsService : ICommentsService
         var query = @"SELECT c.id, c.text, c.time
                           FROM comments AS c
                           JOIN steps AS s ON c.step_id = s.id
-                          JOIN unit_lessons AS ul ON s.id = ul.lesson_id
-                          JOIN lessons AS l ON ul.lesson_id = l.id
+                          JOIN unit_lessons AS ul ON s.lesson_id = ul.lesson_id
                           JOIN units AS u ON ul.unit_id = u.id
                           JOIN courses AS cr ON u.course_id = cr.id
                           WHERE reply_comment_id IS NULL AND cr.id = @id
