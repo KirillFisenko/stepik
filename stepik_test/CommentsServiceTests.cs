@@ -10,6 +10,7 @@ public class CommentsServiceTests
         // Arrange
         var expectedComments = new List<Comment>
         {
+            new Comment { Id = 10, Text = "This step is perfect!", Time = new DateTime(2023, 10, 10) },
             new Comment { Id = 8, Text = "Could use more examples.", Time = new DateTime(2023, 10, 8) },
             new Comment { Id = 6, Text = "Excellent content!", Time = new DateTime(2023, 10, 6) },
             new Comment { Id = 4, Text = "This step is a bit confusing.", Time = new DateTime(2023, 10, 4) },
