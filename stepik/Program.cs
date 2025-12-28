@@ -1,17 +1,9 @@
-﻿using MySql.Data.MySqlClient;
-
-public class Program
+﻿public class Program
 {
     public static void Main()
     {
-        string connectionString = "Server=localhost;Database=test;Uid=root;Pwd=;";
-
-        using (var connection = new MySqlConnection(connectionString))
-        {
-            connection.Open();
-            Console.WriteLine("Подключение открыто");
-            Console.WriteLine("Запросы к БД");
-        }
-        Console.WriteLine("Подключение закрыто");
+        var menu = new MainMenu();
+        menu.Display();
+        menu.HandleUserChoice();
     }
 }
